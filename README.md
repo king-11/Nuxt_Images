@@ -1,0 +1,1 @@
+# Nuxt_Images
