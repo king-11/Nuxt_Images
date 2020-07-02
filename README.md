@@ -17,4 +17,11 @@ $ yarn start
 $ yarn generate
 ```
 
+## Tech Stack
+- NuxtJs
+- VueJS
+- Axios
+
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
