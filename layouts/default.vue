@@ -22,5 +22,21 @@
       padding: 0;
       box-sizing: border-box;
     }
+
+    .page-enter-active, .page-leave-active {
+      transition: all 0.8s ease-in;
+    }
+
+    .page-enter {
+      transform: translateY(-100%) scaleX(0) translateZ(0);
+      transform-origin: left;
+      opacity: 0;
+    }
+
+    .page-leave-to {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
   </style>
 </template>

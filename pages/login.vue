@@ -6,6 +6,14 @@
       :submitForm="loginUser"
       :register="false"
     />
+    <v-snackbar v-model="snackbar" bottom right timeout="4000" color="error">
+      {{ error_message }}
+      <template v-slot:action="{ attrs }">
+        <v-btn dark text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -13,22 +21,31 @@
 import UserAuthForm from '@/components/UserAuthForm'
 
 export default {
+  data() {
+    return {
+      snackbar: false,
+      error_message: '',
+    }
+  },
   components: {
     UserAuthForm,
   },
   methods: {
     async loginUser(loginInfo) {
       try {
-        let response = await this.$auth.loginWith('local', {
+        await this.$auth.loginWith('local', {
           data: {
-            username: loginInfo.username,
-            password: loginInfo.password,
+            ...loginInfo,
           },
         })
-        // this.$router.push('/')
-        console.log(response.data.token)
+        this.error_message = ''
+        this.$router.push('/')
       } catch (e) {
-        console.log(e.response)
+        this.snackbar = true
+        console.error(e.response)
+        let response = e.response.data
+        console.table(response)
+        this.error_message = e.response.statusText
       }
     },
   },

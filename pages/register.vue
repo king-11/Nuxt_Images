@@ -6,6 +6,14 @@
       :submitForm="registerUser"
       :register="true"
     />
+    <v-snackbar v-model="snackbar" bottom right timeout="4000" color="error">
+      {{ error_message }}
+      <template v-slot:action="{ attrs }">
+        <v-btn dark text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -13,6 +21,12 @@
 import UserAuthForm from '@/components/UserAuthForm'
 
 export default {
+  data() {
+    return {
+      snackbar: false,
+      error_message: '',
+    }
+  },
   components: {
     UserAuthForm,
   },
@@ -20,24 +34,20 @@ export default {
     async registerUser(registrationInfo) {
       try {
         let response = await this.$axios.post('/auth/register/', {
-          username: registrationInfo.username,
-          password: registrationInfo.password,
-          email: registrationInfo.email,
-          first_name: registrationInfo.first_name,
-          last_name: registrationInfo.last_name,
+          ...registrationInfo,
         })
-        console.log(response)
-        // this.$store.state.token = response.data
+
         await this.$auth.loginWith('local', {
           data: {
             username: loginInfo.username,
             password: loginInfo.password,
           },
         })
-
+        this.error_message = ''
         this.$router.push('/')
       } catch (e) {
-        console.log(e.response)
+        this.snackbar = true
+        this.error_message = e.response.message
       }
     },
   },

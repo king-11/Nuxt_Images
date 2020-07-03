@@ -4,7 +4,7 @@
     <v-spacer />
     <v-btn text to="/team">Team</v-btn>
     <v-btn text to="/fests">Fests</v-btn>
-    <v-menu app bottom left>
+    <v-menu app bottom left transition="fab-transition">
       <template v-slot:activator="{ on, attrs }">
         <v-btn dark icon v-bind="attrs" v-on="on">
           <v-icon>mdi-dots-vertical</v-icon>
@@ -34,7 +34,9 @@ export default {
   computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
   methods: {
     async logout() {
-      await this.$auth.logout()
+      try {
+        await this.$auth.logout()
+      } catch (error) {}
     },
   },
 }

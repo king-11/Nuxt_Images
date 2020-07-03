@@ -7,3 +7,18 @@ export const getters = {
     return state.auth.user
   }
 }
+
+export const actions = {
+  login: async ({
+    commit
+  }, user) => {
+    await this.auth.loginWith('local', {
+      data: {
+        ...user
+      }
+    })
+
+    this.router.push('/')
+  }
+
+}
