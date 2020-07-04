@@ -44,7 +44,7 @@ export default {
         this.snackbar = true
         console.error(e.response)
         let response = e.response.data
-        console.table(response)
+        let str = response[0]
         this.error_message = e.response.statusText
       }
     },
