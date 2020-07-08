@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav app>
     <v-app-bar app hide-on-scroll>
       <v-app-bar-nav-icon class="ml-2">
         <v-icon left large color="pink" @click="drawer = !drawer"
@@ -13,7 +13,7 @@
       <v-spacer></v-spacer>
       <v-btn
         depressed
-        outline
+        outlined
         class="pink white--text"
         :to="isAuthenticated ? ' ' : '/login'"
       >

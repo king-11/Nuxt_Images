@@ -1,20 +1,22 @@
 <template>
-  <v-container>
-    <h1>Login</h1>
-    <UserAuthForm
-      buttonText="Login"
-      :submitForm="loginUser"
-      :register="false"
-    />
-    <v-snackbar v-model="snackbar" bottom right timeout="4000" color="error">
-      {{ error_message }}
-      <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-  </v-container>
+  <v-main>
+    <v-container>
+      <h1>Login</h1>
+      <UserAuthForm
+        buttonText="Login"
+        :submitForm="loginUser"
+        :register="false"
+      />
+      <v-snackbar v-model="snackbar" bottom right timeout="4000" color="error">
+        {{ error_message }}
+        <template v-slot:action="{ attrs }">
+          <v-btn dark text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
