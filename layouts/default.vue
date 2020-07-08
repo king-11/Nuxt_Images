@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <Navbar />
-    <v-main>
-      <Nuxt />
-    </v-main>
+    <Nuxt />
   </v-app>
 </template>
 
