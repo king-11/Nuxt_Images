@@ -1,45 +1,39 @@
 <template>
-  <v-main>
-    <v-container fluid>
-      <v-layout wrap align-center justify-space-around>
-        <v-flex v-for="n in 9" :key="n" class="py-2 px-1" lg3 md4 sm6 xs12>
-          <v-hover v-slot:default="{ hover }">
-            <v-card tile class="d-flex">
-              <v-img
-                :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                aspect-ratio="1"
-                class="grey lighten-2"
-              >
-                <v-expand-transition>
-                  <div
-                    v-if="hover"
-                    class="d-flex transition-fast-in-out black darken-2 v-card--reveal display-2 white--text"
-                    style="height: 100%;"
-                  >
-                    <div>nimeria</div>
-                    <div>paryatak</div>
-                  </div>
-                </v-expand-transition>
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img>
-            </v-card>
-          </v-hover>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-main>
+  <v-container fluid>
+    <v-layout wrap align-center justify-space-around>
+      <v-flex v-for="n in 9" :key="n" class="py-2 px-1" lg3 md4 sm6 xs12>
+        <v-hover v-slot:default="{ hover }">
+          <v-card tile class="d-flex">
+            <v-img
+              :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+              :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+              aspect-ratio="1"
+              class="grey lighten-2"
+            >
+              <v-expand-transition>
+                <div
+                  v-if="hover"
+                  class="d-flex transition-fast-in-out black darken-2 v-card--reveal display-2 white--text"
+                  style="height: 100%;"
+                >
+                  <div>nimeria</div>
+                  <div>paryatak</div>
+                </div>
+              </v-expand-transition>
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular
+                    indeterminate
+                    color="grey lighten-5"
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+          </v-card>
+        </v-hover>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 <script>
 import axios from 'axios'

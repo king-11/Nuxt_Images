@@ -1,11 +1,30 @@
 <template>
   <nav app>
-    <v-app-bar app hide-on-scroll>
-      <v-app-bar-nav-icon class="ml-2">
-        <v-icon left large color="pink" @click="drawer = !drawer"
-          >mdi-menu</v-icon
+    <v-navigation-drawer app fixed v-model="drawer">
+      <v-list>
+        <v-list-item
+          v-for="item in links"
+          :key="item.title"
+          :to="item.route"
+          router
+          exact
         >
-      </v-app-bar-nav-icon>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar app hide-on-scroll>
+      <v-app-bar-nav-icon
+        large
+        class="pink--text ml-2"
+        @click.stop="drawer = !drawer"
+      />
       <v-toolbar-title text to="/" class="pl-0"
         ><span class="headline font-weight-bold">Wallpaper</span>
         <span class="subheading font-weight-light">Hub</span></v-toolbar-title
@@ -22,24 +41,6 @@
         <span v-else>SignIn</span>
       </v-btn>
     </v-app-bar>
-    <v-navigation-drawer app temporary absolute v-model="drawer">
-      <v-list nav>
-        <v-list-item
-          v-for="item in links"
-          :key="item.title"
-          link
-          :to="`/${item.route}`"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
   </nav>
 </template>
 
