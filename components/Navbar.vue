@@ -22,7 +22,7 @@
     <v-app-bar app hide-on-scroll>
       <v-app-bar-nav-icon
         large
-        class="pink--text ml-2"
+        class="pink--text"
         @click.stop="drawer = !drawer"
       />
       <v-toolbar-title text to="/" class="pl-0"
@@ -50,9 +50,9 @@ export default {
   data() {
     return {
       links: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', route: '' },
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', route: '/' },
         { title: 'Team', icon: 'mdi-account-group', route: '/team' },
-        { title: 'Fests', icon: 'mdi-party-popper', route: 'fests' },
+        { title: 'Fests', icon: 'mdi-party-popper', route: '/fests' },
       ],
       drawer: false,
     }
