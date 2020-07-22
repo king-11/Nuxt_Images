@@ -6,7 +6,7 @@
       :submitForm="loginUser"
       :register="false"
     />
-    <v-snackbar v-model="snackbar" bottom right timeout="4000" color="error">
+    <v-snackbar v-model="snackbar" bottom right timeout="4000" :color="color">
       {{ error_message }}
       <template v-slot:action="{ attrs }">
         <v-btn dark text v-bind="attrs" @click="snackbar = false">
@@ -25,6 +25,7 @@ export default {
     return {
       snackbar: false,
       error_message: '',
+      color: '',
     }
   },
   components: {
@@ -33,22 +34,24 @@ export default {
   methods: {
     async loginUser(loginInfo) {
       try {
+        this.error_message = 'Authenticating ...'
+        this.color = 'info'
+        this.snackbar = true
         await this.$auth.loginWith('local', {
           data: {
             ...loginInfo,
           },
         })
-        this.error_message = ''
         this.$router.push('/')
       } catch (e) {
+        this.error_message = 'Invalid Credentials'
+        this.color = 'error'
         this.snackbar = true
-        console.error(e.response)
-        let response = e.response.data
-        let str = response[0]
-        this.error_message = e.response.statusText
       }
     },
   },
+  middleware: ['auth'],
+  auth: 'guest'
 }
 </script>
 

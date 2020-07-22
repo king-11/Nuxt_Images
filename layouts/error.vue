@@ -28,13 +28,8 @@ export default {
         y += (lFollowY - y) * friction
 
         let translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)'
-        let img = document.getElementById('background')
-        img.setAttribute(
-          'style',
-          `'-webit-transform': ${translate};
-        '-moz-transform': ${translate};
-        transform: ${translate};`
-        )
+        let img = document.querySelector('#background')
+        img.setAttribute('style',`-webit-transform: ${translate};-moz-transform: ${translate};transform: ${translate};`)
 
         window.requestAnimationFrame(animate)
       }

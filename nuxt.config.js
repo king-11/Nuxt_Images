@@ -81,11 +81,17 @@ export default {
             method: 'get',
             propertyName: false,
           },
+          logout: false,
         },
-        logout: false,
         tokenRequired: true,
         tokenType: 'Token',
       },
+      redirect: {
+        login: '/login',
+        logout: '/',
+        callback: '/',
+        home: '/'
+      }
     },
   },
   axios: {
@@ -96,4 +102,10 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+  cookie: { 
+    prefix: "auth.", 
+    options: { 
+      sameSite: true 
+    } 
+  },
 }

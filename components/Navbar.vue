@@ -60,9 +60,7 @@ export default {
   computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
   methods: {
     async logout() {
-      try {
         await this.$auth.logout()
-      } catch (error) {}
     },
   },
 }
