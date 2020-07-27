@@ -1,6 +1,8 @@
 <template>
-  <v-container>
-    <h1>Register</h1>
+  <v-layout class="mt-5" wrap align-center justify-center>
+    <v-flex xs12>
+      <h1 align="center">Register</h1>
+    </v-flex>
     <UserAuthForm
       buttonText="Register"
       :submitForm="registerUser"
@@ -14,7 +16,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </v-container>
+  </v-layout>
 </template>
 
 <script>
@@ -46,6 +48,7 @@ export default {
         this.error_message = ''
         this.$router.push('/')
       } catch (e) {
+        this.color = 'error'
         this.snackbar = true
         this.error_message = e.response.message
       }

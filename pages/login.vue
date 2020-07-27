@@ -1,6 +1,8 @@
 <template>
-  <v-container>
-    <h1>Login</h1>
+  <v-layout class="mt-5" wrap align-center justify-center>
+    <v-flex xs12>
+      <h1 align="center">Login</h1>
+    </v-flex>
     <UserAuthForm
       buttonText="Login"
       :submitForm="loginUser"
@@ -14,7 +16,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </v-container>
+  </v-layout>
 </template>
 
 <script>
@@ -51,7 +53,7 @@ export default {
     },
   },
   middleware: ['auth'],
-  auth: 'guest'
+  auth: 'guest',
 }
 </script>
 
