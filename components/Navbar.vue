@@ -60,8 +60,20 @@ export default {
   computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
   methods: {
     async logout() {
-        await this.$auth.logout()
+      await this.$auth.logout()
     },
+  },
+  mounted() {
+    if (!this.isAuthenticated) {
+      this.links.push(
+        { title: 'Login', icon: 'mdi-account-outline', route: '/login' },
+        {
+          title: 'Register',
+          icon: 'mdi-account-multiple-plus',
+          route: '/register',
+        }
+      )
+    }
   },
 }
 </script>
