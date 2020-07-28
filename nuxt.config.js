@@ -15,8 +15,7 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || '',
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8',
       },
       {
@@ -29,13 +28,11 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-    ],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    }, ],
   },
   /*
    ** Global CSS
@@ -102,10 +99,10 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
-  cookie: { 
-    prefix: "auth.", 
-    options: { 
-      sameSite: true 
-    } 
+  cookie: {
+    prefix: "auth.",
+    options: {
+      sameSite: true
+    }
   },
 }
