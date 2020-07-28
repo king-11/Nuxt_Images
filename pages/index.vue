@@ -10,7 +10,7 @@
           transition="fade-transition"
         >
           <v-hover v-slot:default="{ hover }">
-            <v-card tile class="d-flex">
+            <v-card tile class="d-flex flex-column">
               <v-img
                 :src="`https://picsum.photos/seed/${n}/500/300`"
                 :lazy-src="`https://picsum.photos/seed/${n}/500/300`"
@@ -40,20 +40,33 @@
                   </v-row>
                 </template>
               </v-img>
+              <v-btn large icon fab right absolute>
+                <v-icon color="pink">mdi-heart-outline</v-icon>
+              </v-btn>
             </v-card>
           </v-hover>
         </v-lazy>
       </v-flex>
+      <v-btn
+        v-if="isAuthenticated"
+        color="pink"
+        dark
+        x-large
+        fixed
+        bottom
+        right
+        fab
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-layout>
   </v-container>
 </template>
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 export default {
-  // async asyncData({ params }) {
-  //   const { data } = await axios.get('api/')
-  //   return { images: data }
-  // },
+  computed: { ...mapGetters(['isAuthenticated']) },
 }
 </script>
 
