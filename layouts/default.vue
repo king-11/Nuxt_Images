@@ -4,6 +4,11 @@
     <v-main>
       <Nuxt />
     </v-main>
+    <v-footer padless>
+      <v-col class="text-center pink white--text" cols="12">
+        &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
