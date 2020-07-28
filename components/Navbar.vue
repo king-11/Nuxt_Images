@@ -2,6 +2,19 @@
   <nav app>
     <v-navigation-drawer app fixed v-model="drawer">
       <v-list>
+        <v-col justify="space-around" align="center">
+          <v-avatar color="pink" size="70">
+            <v-icon dark size="70">mdi-account-circle</v-icon>
+          </v-avatar>
+          <v-list v-if="isAuthenticated">
+            <v-list-item v-for="(item, key) in loggedInUser" :key="item">
+              <v-list-item-content>
+                <v-list-item-title>{{ item }}</v-list-item-title>
+                <v-list-item-subtitle>{{ key }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-col>
         <v-list-item
           v-for="item in links"
           :key="item.title"
@@ -34,7 +47,7 @@
         depressed
         outlined
         class="pink white--text"
-        :to="isAuthenticated ? ' ' : '/login'"
+        :to="isAuthenticated ? '/' : '/login'"
       >
         <v-icon left>mdi-exit-to-app</v-icon>
         <span v-if="isAuthenticated" @click="logout">SignOut</span>
