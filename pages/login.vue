@@ -3,25 +3,20 @@
     <v-flex xs12>
       <h1 align="center">Login</h1>
     </v-flex>
-    <UserAuthForm
-      buttonText="Login"
-      :submitForm="loginUser"
-      :register="false"
-    />
+    <v-btn @click="google">Google</v-btn>
+    <v-btn @click="facebook">Facebook</v-btn>
+    <v-btn @click="github">GitHub</v-btn>
     <v-snackbar v-model="snackbar" bottom right timeout="4000" :color="color">
       {{ error_message }}
       <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
+        <v-btn dark text v-bind="attrs" @click="snackbar = false">Close</v-btn>
       </template>
     </v-snackbar>
   </v-layout>
 </template>
 
 <script>
-import UserAuthForm from '@/components/UserAuthForm'
-
+import { auth } from 'firebase/app'
 export default {
   data() {
     return {
@@ -30,26 +25,15 @@ export default {
       color: '',
     }
   },
-  components: {
-    UserAuthForm,
-  },
   methods: {
-    async loginUser(loginInfo) {
-      try {
-        this.error_message = 'Authenticating ...'
-        this.color = 'info'
-        this.snackbar = true
-        await this.$auth.loginWith('local', {
-          data: {
-            ...loginInfo,
-          },
-        })
-        this.$router.push('/')
-      } catch (e) {
-        this.error_message = 'Invalid Credentials'
-        this.color = 'error'
-        this.snackbar = true
-      }
+    github() {
+      this.$store.dispatch('loginGithub')
+    },
+    google() {
+      this.$store.dispatch('loginGoogle')
+    },
+    facebook() {
+      this.$store.dispatch('loginFacebook')
     },
   },
   middleware: ['auth'],
