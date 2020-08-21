@@ -2,14 +2,14 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDBW5KIEDZJBjPldk5o2phZ0rd4D2CiDQY',
-  authDomain: 'wallpaper-2fbd1.firebaseapp.com',
-  databaseURL: 'https://wallpaper-2fbd1.firebaseio.com',
-  projectId: 'wallpaper-2fbd1',
-  storageBucket: 'wallpaper-2fbd1.appspot.com',
-  messagingSenderId: '885838087101',
-  appId: '1:885838087101:web:86856177e844dadf3d88d4',
-  measurementId: 'G-CQWGWZC1VK',
+  apiKey: "AIzaSyBCqbfLbW4DlDDJWb8_hg_gjAUVzYxY2RM",
+    authDomain: "wallpaper-8c551.firebaseapp.com",
+    databaseURL: "https://wallpaper-8c551.firebaseio.com",
+    projectId: "wallpaper-8c551",
+    storageBucket: "wallpaper-8c551.appspot.com",
+    messagingSenderId: "896165273896",
+    appId: "1:896165273896:web:e65f4913e226dc36f0301d",
+    measurementId: "G-QBDWRTV3ND"
 }
 
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : ' '
