@@ -6,22 +6,16 @@
           <v-avatar color="pink" size="70">
             <v-icon dark size="70">mdi-account-circle</v-icon>
           </v-avatar>
-          <v-list v-if="isAuthenticated">
+          <!-- <v-list v-if="isAuthenticated">
             <v-list-item v-for="(item, key) in loggedInUser" :key="item">
               <v-list-item-content>
                 <v-list-item-title>{{ item }}</v-list-item-title>
                 <v-list-item-subtitle>{{ key }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-          </v-list>
+          </v-list>-->
         </v-col>
-        <v-list-item
-          v-for="item in links"
-          :key="item.title"
-          :to="item.route"
-          router
-          exact
-        >
+        <v-list-item v-for="item in links" :key="item.title" :to="item.route" router exact>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -33,22 +27,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app hide-on-scroll>
-      <v-app-bar-nav-icon
-        large
-        class="pink--text"
-        @click.stop="drawer = !drawer"
-      />
-      <v-toolbar-title text to="/" class="pl-0"
-        ><span class="headline font-weight-bold">Wallpaper</span>
-        <span class="subheading font-weight-light">Hub</span></v-toolbar-title
-      >
+      <v-app-bar-nav-icon large class="pink--text" @click.stop="drawer = !drawer" />
+      <v-toolbar-title text to="/" class="pl-0">
+        <span class="headline font-weight-bold">Wallpaper</span>
+        <span class="subheading font-weight-light">Hub</span>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        depressed
-        outlined
-        class="pink white--text"
-        :to="isAuthenticated ? '/' : '/login'"
-      >
+      <v-btn depressed outlined class="pink white--text" :to="isAuthenticated ? '/' : '/login'">
         <v-icon left>mdi-exit-to-app</v-icon>
         <span v-if="isAuthenticated" @click="logout">SignOut</span>
         <span v-else>SignIn</span>
@@ -72,22 +57,11 @@ export default {
   },
   computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
   methods: {
-    async logout() {
-      await this.$auth.logout()
+    logout() {
+      this.$store.dispatch('logout')
     },
   },
-  mounted() {
-    if (!this.isAuthenticated) {
-      this.links.push(
-        { title: 'Login', icon: 'mdi-account-outline', route: '/login' },
-        {
-          title: 'Register',
-          icon: 'mdi-account-multiple-plus',
-          route: '/register',
-        }
-      )
-    }
-  },
+  mounted() {},
 }
 </script>
 
