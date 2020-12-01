@@ -6,9 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "export": "nuxt export",
-    "serve": "nuxt serve",
-    "heroku-postbuild": "nuxt build"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
