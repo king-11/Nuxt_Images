@@ -4,6 +4,18 @@
     <v-main>
       <Nuxt />
     </v-main>
+    <v-snackbar
+      v-if="snackbar.show"
+      :value="snackbar"
+      :app="true"
+      :timeout="5000"
+      elevation="20"
+      bottom
+      :color="snackbar.color"
+      mb-5
+    >
+      {{ snackbar.message }}
+    </v-snackbar>
     <v-footer padless>
       <v-col class="text-center pink white--text" cols="12">
         &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
@@ -18,6 +30,11 @@ export default {
   components: {
     Navbar,
   },
+  computed:{
+    snackbar () {
+      return this.$store.getters['snackbar']
+    }
+  }
 }
 </script>
 

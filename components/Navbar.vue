@@ -4,7 +4,7 @@
       <v-list>
         <v-col justify="space-around" align="center">
           <v-avatar color="pink" size="70">
-            <v-icon dark size="70">mdi-account-circle</v-icon>
+            <v-icon dark size="70">{{ mdiAccountCircle }}</v-icon>
           </v-avatar>
           <!-- <v-list v-if="isAuthenticated">
             <v-list-item v-for="(item, key) in loggedInUser" :key="item">
@@ -27,14 +27,16 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app hide-on-scroll>
-      <v-app-bar-nav-icon large class="pink--text" @click.stop="drawer = !drawer" />
-      <v-toolbar-title text to="/" class="pl-0">
-        <span class="headline font-weight-bold">Wallpaper</span>
+      <v-icon large class="pink--text mr-2 mr-md-4" @click.stop="drawer = !drawer">
+        {{mdiApps}}
+      </v-icon>
+      <v-toolbar-title text class="pl-0">
+        <nuxt-link to="/" class="headline font-weight-bold black--text" style="text-decoration:none">Wallpaper</nuxt-link>
         <span class="subheading font-weight-light">Hub</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn depressed outlined class="pink white--text" :to="isAuthenticated ? '/' : '/login'">
-        <v-icon left>mdi-exit-to-app</v-icon>
+        <v-icon left>{{ mdiExitToApp }}</v-icon>
         <span v-if="isAuthenticated" @click="logout">SignOut</span>
         <span v-else>SignIn</span>
       </v-btn>
@@ -44,15 +46,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { mdiApps ,mdiExitToApp, mdiAccountCircle, mdiViewDashboard, mdiAccountGroup, mdiPartyPopper } from '@mdi/js';
+
 export default {
   data() {
     return {
       links: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', route: '/' },
-        { title: 'Team', icon: 'mdi-account-group', route: '/team' },
-        { title: 'Fests', icon: 'mdi-party-popper', route: '/fests' },
+        { title: 'Dashboard', icon: mdiViewDashboard, route: '/' },
+        { title: 'Team', icon: mdiAccountGroup, route: '/team' },
+        { title: 'Fests', icon: mdiPartyPopper, route: '/fests' },
       ],
       drawer: false,
+      mdiExitToApp,
+      mdiAccountCircle,
+      mdiApps
     }
   },
   computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
@@ -62,6 +69,16 @@ export default {
     },
   },
   mounted() {},
+  head: {
+    title: 'Login',
+    meta:[
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Social Auth login page for wallpaper hub'
+      }
+    ]
+  }
 }
 </script>
 

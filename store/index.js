@@ -4,6 +4,11 @@ export const strict = false
 
 export const state = () => ({
   user: null,
+  snackbar: {
+    show: false,
+    color: "blue",
+    message: "",
+  }
 })
 
 export const getters = {
@@ -14,6 +19,10 @@ export const getters = {
   loggedInUser(state) {
     return state.user
   },
+
+  snackbar(state) {
+    return state.snackbar
+  }
 }
 
 export const mutations = {
@@ -51,4 +60,8 @@ export const actions = {
       console.log(err)
     }
   },
+  async emailLogin({ commit }, {email, password}) {
+    const user = await auth.signInWithEmailAndPassword(email, password);
+
+  }
 }

@@ -41,7 +41,7 @@
                 </template>
               </v-img>
               <v-btn large icon fab right absolute>
-                <v-icon color="pink">mdi-heart-outline</v-icon>
+                <v-icon color="pink">{{mdiHeartOutline}}</v-icon>
               </v-btn>
             </v-card>
           </v-hover>
@@ -57,7 +57,7 @@
         right
         fab
       >
-        <v-icon>mdi-plus</v-icon>
+        <v-icon>{{mdiPlus}}</v-icon>
       </v-btn>
     </v-layout>
   </v-container>
@@ -65,8 +65,15 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import { mdiPlus, mdiHeartOutline } from '@mdi/js';
 export default {
   computed: { ...mapGetters(['isAuthenticated']) },
+  data() {
+    return {
+      mdiPlus,
+      mdiHeartOutline
+    }
+  }
 }
 </script>
 
