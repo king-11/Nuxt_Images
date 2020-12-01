@@ -73,6 +73,16 @@ export default {
       mdiPlus,
       mdiHeartOutline
     }
+  },
+  head: {
+    title: "Home",
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Landing Page',
+      },
+    ]
   }
 }
 </script>

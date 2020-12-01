@@ -1,12 +1,12 @@
 <template>
-  <div class="parallax pt-5 px-5">
-    <v-row>
-      <v-col cols="12" sm="6" xl="4">
+  <v-container fluid class="parallax mx-0 my-0 pt-5 px-5 px-sm-16 px-md-5">
+    <v-row justify="center">
+      <v-col cols="12" sm="12" md="5" lg="4">
         <div><p class="text-center text-h5 font-weight-bold">Login into your account</p></div>
         <div>
           <p class="text-center text-body-2 text--secondary">Don't have an account? <nuxt-link to="/register" exact="">Sign Up Now!</nuxt-link></p>
         </div>
-        <div class="form-container mx-auto">
+        <div class="my-8 form-container mx-auto">
           <v-text-field v-model="email" :rules="emailRules">
               Email
             <v-icon slot="prepend" color="pink">
@@ -24,17 +24,17 @@
           </v-text-field>
         </div>
       </v-col>
-      <v-col cols="12" sm="6" xl="4">
+      <v-col cols="12" sm="12" md="5" lg="4">
         <div class="buttonContainer">
-          <p class="text-center text-subtitle">Login using social media to get quick access</p>
-          <v-btn v-for="content in loginOptions" :key="content.name" :color="content.color" class="white--text mt-3">
+          <p class="text-center text-subtitle text-md-h6">Login using social media to get quick access</p>
+          <v-btn v-for="content in loginOptions" :key="content.name" :color="content.color" class="white--text my-3">
             <span class="text-capitalize">Signin with {{content.name}}</span>
             <v-icon right>{{content.icon}}</v-icon>
           </v-btn>
         </div>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -96,6 +96,16 @@ export default {
   },
   middleware: ['auth'],
   auth: 'guest',
+  head: {
+    title: "Login",
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Login Page',
+      },
+    ]
+  }
 }
 </script>
 
@@ -107,7 +117,7 @@ export default {
 .parallax {
   height: 100vh;
   width: 100vw;
-  background-image: url('~assets/images/background.jpg');
+  background-image: url('~assets/images/background.webp');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
