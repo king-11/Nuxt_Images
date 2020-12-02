@@ -7,29 +7,37 @@
           <p class="text-center text-body-2 text--secondary">Don't have an account? <nuxt-link to="/register" exact="">Sign Up Now!</nuxt-link></p>
         </div>
         <div class="my-8 form-container mx-auto">
-          <v-text-field label="Email" v-model="email" :rules="emailRules">
-            <v-icon slot="prepend" color="pink">
-              {{icons.mdiEmail}}
-            </v-icon>
-          </v-text-field>
-          <v-text-field label="Password" :type="passwordShow ? 'text': 'password'" v-model="password" :rules="passwordRules">
-            <v-icon slot="prepend" color="pink">
-              {{icons.mdiDominoMask}}
-            </v-icon>
-            <v-icon slot="append" color="pink" @click="passwordShow = !passwordShow">
-              <slot v-if="passwordShow">
-              {{icons.mdiEye}}
-              </slot>
-              <slot v-else>
-                {{icons.mdiEyeOff}}
-              </slot>
-            </v-icon>
-          </v-text-field>
+          <v-form @submit.prevent="emailLogin" lazy-validationr ref="emailLogin" v-model="valid">
+            <v-text-field label="Email" v-model="email" :rules="emailRules">
+              <v-icon slot="prepend" color="pink">
+                {{icons.mdiEmail}}
+              </v-icon>
+            </v-text-field>
+            <v-text-field label="Password" :type="passwordShow ? 'text': 'password'" v-model="password" :rules="passwordRules">
+              <v-icon slot="prepend" color="pink">
+                {{icons.mdiDominoMask}}
+              </v-icon>
+              <v-icon slot="append" color="pink" @click="passwordShow = !passwordShow">
+                <slot v-if="passwordShow">
+                {{icons.mdiEye}}
+                </slot>
+                <slot v-else>
+                  {{icons.mdiEyeOff}}
+                </slot>
+              </v-icon>
+            </v-text-field>
+            <div class="buttonContainer">
+              <v-btn type="submit" class="pink--text darken-1">
+                  Login
+              </v-btn>
+            </div>
+          </v-form>
         </div>
+        <v-divider class="hidden-md-and-up"/>
       </v-col>
       <v-col cols="12" sm="12" md="5" lg="4">
-        <div class="buttonContainer">
-          <p class="text-center text-subtitle text-md-h6">Login using social media to get quick access</p>
+        <p class="text-center text-subtitle text-md-h6">Login using social media to get quick access</p>
+        <div class="buttonContainer mt-10">
           <v-btn :name="content.name" v-for="content in loginOptions" :key="content.name" :color="content.color" class="white--text my-3">
             <span class="text-capitalize">Signin with {{content.name}}</span>
             <v-icon right>{{content.icon}}</v-icon>
@@ -48,6 +56,7 @@ import { required, emailFormat, minLength } from '../utils/validations';
 export default {
   data() {
     return {
+      valid:true,
       snackbar: false,
       passwordShow: false,
       error_message: '',
@@ -96,6 +105,13 @@ export default {
     facebook() {
       this.$store.dispatch('loginFacebook')
     },
+    emailLogin() {
+      this.$refs.emailLogin.validate()
+      if(!this.valid)
+        return;
+      const credentials = {email:this.email.trim(),password:this.password.trim()}
+      this.$store.dispatch('emailLogin',credentials);
+    }
   },
   middleware: ['auth'],
   auth: 'guest',

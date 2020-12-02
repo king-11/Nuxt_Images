@@ -64,7 +64,16 @@ export const actions = {
     }
   },
   async emailLogin({ commit }, {email, password}) {
+  try {
     const user = await auth.signInWithEmailAndPassword(email, password);
-
+    commit('setUser',user.user)
+  } catch(err) {
+    if(err.code === "auth/user-not-found"){
+      commit('displaySnackbar',{
+        message:"User hasn't been registered yet",
+        color:"blue"
+      })
+    }
+  }
   }
 }
