@@ -60,6 +60,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    '@nuxtjs/pwa'
   ],
   /*
    ** Axios module configuration
@@ -103,7 +104,6 @@ export default {
       iconfont: 'mdiSvg',
     },
     theme: {
-      dark: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,
