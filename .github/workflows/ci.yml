@@ -46,3 +46,6 @@ jobs:
 
       - name: Run linter 👀
         run: yarn lint
+        
+      - name: Static Build
+        run: yarn generate
