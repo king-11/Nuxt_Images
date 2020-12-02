@@ -95,6 +95,12 @@ export default Vue.extend({
       mdiApps,
     }
   },
+  computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+    },
+  },
   head: {
     title: 'Login',
     meta: [
@@ -104,13 +110,6 @@ export default Vue.extend({
         content: 'Social Auth login page for wallpaper hub',
       },
     ],
-  },
-  computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
-  mounted() {},
-  methods: {
-    logout() {
-      this.$store.dispatch('logout')
-    },
   },
 })
 </script>

@@ -130,16 +130,6 @@ export default Vue.extend({
       ],
     }
   },
-  head: {
-    title: 'Login',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Wallpaper Hub Login Page',
-      },
-    ],
-  },
   methods: {
     socialAuthHandle(name: string) {
       this.$store.dispatch(`login${name}`)
@@ -155,6 +145,16 @@ export default Vue.extend({
       }
       this.$store.dispatch('emailLogin', credentials)
     },
+  },
+  head: {
+    title: 'Login',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Login Page',
+      },
+    ],
   },
   auth: 'guest',
 })

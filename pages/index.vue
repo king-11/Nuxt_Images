@@ -72,6 +72,7 @@ export default Vue.extend({
       mdiHeartOutline,
     }
   },
+  computed: { ...mapGetters(['isAuthenticated']) },
   head: {
     title: 'Home',
     meta: [
@@ -82,7 +83,6 @@ export default Vue.extend({
       },
     ],
   },
-  computed: { ...mapGetters(['isAuthenticated']) },
 })
 </script>
 
