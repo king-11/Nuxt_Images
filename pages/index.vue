@@ -9,7 +9,7 @@
           }"
           transition="fade-transition"
         >
-          <v-hover v-slot:default="{ hover }">
+          <v-hover v-slot="{ hover }">
             <v-card tile class="d-flex flex-column">
               <v-img
                 :src="`https://picsum.photos/seed/${n}/500/300`"
@@ -21,27 +21,26 @@
                   <div
                     v-if="hover"
                     class="d-flex transition-fast-in-out black darken-2 v-card--reveal display-2 white--text"
-                    style="height: 100%;"
+                    style="height: 100%"
                   >
                     <div>nimeria</div>
                     <div>paryatak</div>
                   </div>
                 </v-expand-transition>
-                <template v-slot:placeholder>
+                <template #placeholder>
                   <v-row
                     class="fill-height ma-0"
                     align="center"
                     justify="center"
                   >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
+                    <v-progress-circular indeterminate color="grey lighten-5" />
                   </v-row>
                 </template>
               </v-img>
               <v-btn large icon fab right absolute>
-                <v-icon color="pink">{{mdiHeartOutline}}</v-icon>
+                <v-icon color="pink">
+                  {{ mdiHeartOutline }}
+                </v-icon>
               </v-btn>
             </v-card>
           </v-hover>
@@ -57,34 +56,34 @@
         right
         fab
       >
-        <v-icon>{{mdiPlus}}</v-icon>
+        <v-icon>{{ mdiPlus }}</v-icon>
       </v-btn>
     </v-layout>
   </v-container>
 </template>
-<script>
-import axios from 'axios'
+<script lang="ts">
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
-import { mdiPlus, mdiHeartOutline } from '@mdi/js';
-export default {
-  computed: { ...mapGetters(['isAuthenticated']) },
+import { mdiPlus, mdiHeartOutline } from '@mdi/js'
+export default Vue.extend({
   data() {
     return {
       mdiPlus,
-      mdiHeartOutline
+      mdiHeartOutline,
     }
   },
   head: {
-    title: "Home",
+    title: 'Home',
     meta: [
       {
         hid: 'description',
         name: 'description',
         content: 'Wallpaper Hub Landing Page',
       },
-    ]
-  }
-}
+    ],
+  },
+  computed: { ...mapGetters(['isAuthenticated']) },
+})
 </script>
 
 <style>

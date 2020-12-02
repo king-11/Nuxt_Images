@@ -5,41 +5,50 @@
         <h1>404</h1>
         <h2>Page not found</h2>
         <p>I tried to catch some fog, but i mist</p>
-        <nuxt-link to="/">back to home</nuxt-link>
+        <nuxt-link to="/"> back to home </nuxt-link>
       </div>
       <img id="background" src="http://www.supah.it/dribbble/008/008.jpg" />
     </div>
   </v-app>
 </template>
 
-<script>
-export default {
-  name: 'error',
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+  name: 'Error',
+  mounted() {
+    this.animation()
+  },
   methods: {
     animation() {
-      var lFollowX = 0,
-        lFollowY = 0,
-        x = 0,
-        y = 0,
-        friction = 1 / 30
+      let lFollowX = 0
+      let lFollowY = 0
+      let x = 0
+      let y = 0
+      const friction = 1 / 30
 
       function animate() {
         x += (lFollowX - x) * friction
         y += (lFollowY - y) * friction
 
-        let translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)'
-        let img = document.querySelector('#background')
-        img.setAttribute('style',`-webit-transform: ${translate};-moz-transform: ${translate};transform: ${translate};`)
+        const translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)'
+        const img = document.querySelector('#background')
+        if (img)
+          img.setAttribute(
+            'style',
+            `-webit-transform: ${translate};-moz-transform: ${translate};transform: ${translate};`
+          )
 
         window.requestAnimationFrame(animate)
       }
 
       document.addEventListener('mousemove', function (e) {
-        var lMouseX = Math.max(
+        const lMouseX = Math.max(
           -100,
           Math.min(100, window.innerWidth / 2 - e.clientX)
         )
-        var lMouseY = Math.max(
+        const lMouseY = Math.max(
           -100,
           Math.min(100, window.innerHeight / 2 - e.clientY)
         )
@@ -50,11 +59,7 @@ export default {
       animate()
     },
   },
-  mounted() {
-    this.animation()
-    console.log('run')
-  },
-}
+})
 </script>
 
 <style scoped lang="scss">

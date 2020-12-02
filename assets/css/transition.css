@@ -25,3 +25,16 @@
 html::-webkit-scrollbar {
   width: 0em;
 }
+
+.block-enter-active,
+.block-leave-active {
+  transition: opacity .5s;
+}
+
+.block-enter,
+.block-leave-to
+
+/* .fade-leave-active below version 2.1.8 */
+  {
+  opacity: 0;
+}

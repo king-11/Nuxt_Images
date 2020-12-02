@@ -12,7 +12,8 @@ export default {
    */
   head: {
     titleTemplate: '%s - P2P',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8',
       },
       {
@@ -25,25 +26,23 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico',
-    }, ],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
+    ],
   },
   /*
    ** Global CSS
    */
-  css: [
-    '~/assets/css/transition.css',
-  ],
+  css: ['~/assets/css/transition.css'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    '~/plugins/firebase.js'
-  ],
+  plugins: [],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -52,7 +51,12 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxtjs/vuetify'],
+  buildModules: [
+    // https://go.nuxtjs.dev/typescript
+    '@nuxt/typescript-build',
+    // https://go.nuxtjs.dev/vuetify
+    '@nuxtjs/vuetify',
+  ],
   /*
    ** Nuxt.js modules
    */
@@ -60,7 +64,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa'
+    // https://go.nuxtjs.dev/pwa
+    '@nuxtjs/pwa',
   ],
   /*
    ** Axios module configuration
@@ -89,8 +94,8 @@ export default {
         login: '/login',
         logout: '/',
         callback: '/',
-        home: '/'
-      }
+        home: '/',
+      },
     },
   },
   axios: {
@@ -115,7 +120,7 @@ export default {
           success: colors.green.accent3,
         },
       },
-    }
+    },
   },
   /*
    ** Build configuration
@@ -123,13 +128,13 @@ export default {
    */
   build: {},
   cookie: {
-    prefix: "auth.",
+    prefix: 'auth.',
     options: {
-      sameSite: true
-    }
+      sameSite: true,
+    },
   },
   pageTransition: {
     name: 'fade',
-    mode: 'out-in'
-  }
+    mode: 'out-in',
+  },
 }

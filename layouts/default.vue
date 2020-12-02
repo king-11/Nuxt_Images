@@ -14,12 +14,13 @@
       rounded
       :color="snackbar.color"
       mb-5
-      class="text-center"
     >
-      {{ snackbar.message }}
-      <template v-slot:action="{ attrs }">
+      <slot>
+        <span class="text-center">{{ snackbar.message }}</span>
+      </slot>
+      <template #action="{ attrs }">
         <v-btn icon text v-bind="attrs" @click="closeSnackBar">
-          <v-icon>{{mdiCloseCircleOutline}}</v-icon>
+          <v-icon>{{ mdiCloseCircleOutline }}</v-icon>
         </v-btn>
       </template>
     </v-snackbar>
@@ -31,29 +32,30 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
+import { mdiCloseCircleOutline } from '@mdi/js'
 import Navbar from '~/components/Navbar.vue'
-import { mdiCloseCircleOutline } from '@mdi/js';
-export default {
-  data() {
-    return {
-      mdiCloseCircleOutline
-    }
-  },
+export default Vue.extend({
   components: {
     Navbar,
   },
-  computed:{
-    snackbar () {
-      return this.$store.getters['snackbar']
+  data() {
+    return {
+      mdiCloseCircleOutline,
     }
+  },
+  computed: {
+    snackbar() {
+      return this.$store.getters.snackbar
+    },
   },
   methods: {
     closeSnackBar() {
-      return this.$store.commit('displaySnackbar',{show:false})
-    }
-  }
-}
+      return this.$store.commit('displaySnackbar', { show: false })
+    },
+  },
+})
 </script>
 
 <style lang="scss">
