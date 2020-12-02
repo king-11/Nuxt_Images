@@ -29,6 +29,9 @@ export const mutations = {
   setUser(state, user) {
     state.user = user
   },
+  displaySnackbar(state, details){
+    state.snackbar = {show:true,...details}
+  }
 }
 
 export const actions = {

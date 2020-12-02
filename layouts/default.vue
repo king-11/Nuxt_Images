@@ -7,14 +7,21 @@
     <v-snackbar
       v-if="snackbar.show"
       :value="snackbar"
-      :app="true"
+      app
       :timeout="5000"
       elevation="20"
       bottom
+      rounded
       :color="snackbar.color"
       mb-5
+      class="text-center"
     >
       {{ snackbar.message }}
+      <template v-slot:action="{ attrs }">
+        <v-btn icon text v-bind="attrs" @click="closeSnackBar">
+          <v-icon>{{mdiCloseCircleOutline}}</v-icon>
+        </v-btn>
+      </template>
     </v-snackbar>
     <v-footer padless>
       <v-col class="text-center pink white--text" cols="12">
@@ -26,13 +33,24 @@
 
 <script>
 import Navbar from '~/components/Navbar.vue'
+import { mdiCloseCircleOutline } from '@mdi/js';
 export default {
+  data() {
+    return {
+      mdiCloseCircleOutline
+    }
+  },
   components: {
     Navbar,
   },
   computed:{
     snackbar () {
       return this.$store.getters['snackbar']
+    }
+  },
+  methods: {
+    closeSnackBar() {
+      return this.$store.commit('displaySnackbar',{show:false})
     }
   }
 }
