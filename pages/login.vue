@@ -39,7 +39,8 @@
 
 <script>
 import { auth } from 'firebase/app'
-import { mdiEmail, mdiEye, mdiDominoMask, mdiFacebook, mdiGoogle, mdiGithub } from '@mdi/js'
+import { mdiEmail, mdiEye, mdiDominoMask, mdiFacebook, mdiGoogle, mdiGithub, mdiEyeOff } from '@mdi/js'
+import { required, emailFormat, minLength } from '../utils/validations';
 
 export default {
   data() {
@@ -50,19 +51,17 @@ export default {
       email: '',
       password: '',
       emailRules: [
-        value => !!value || 'Required.',
-        value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Invalid e-mail.'
-        },
+        emailFormat(),
+        required()
       ],
       passwordRules: [
-        value => !!value || 'Required.',
+        required()
       ],
       icons: {
         mdiEmail,
         mdiEye,
-        mdiDominoMask
+        mdiDominoMask,
+        mdiEyeOff
       },
       loginOptions:[
         {
