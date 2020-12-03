@@ -8,14 +8,16 @@
               {{ mdiAccountCircle }}
             </v-icon>
           </v-avatar>
-          <v-list v-if="this.$auth.loggedIn">
-            <v-list-item v-for="(item, key) in this.$auth.user" :key="item">
-              <v-list-item-content>
-                <v-list-item-title>{{ item }}</v-list-item-title>
-                <v-list-item-subtitle>{{ key }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+          <client-only>
+            <v-list v-if="this.$auth.loggedIn">
+              <v-list-item v-for="(item, key) in this.$auth.user" :key="item">
+                <v-list-item-content>
+                  <v-list-item-title>{{ item }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ key }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </client-only>
         </v-col>
         <v-list-item
           v-for="item in links"
@@ -61,8 +63,10 @@
           <v-icon left>
             {{ mdiExitToApp }}
           </v-icon>
-          <span v-if="this.$auth.loggedIn" @click="logout">SignOut</span>
-          <span v-else>SignIn</span>
+          <client-only>
+            <span v-if="this.$auth.loggedIn" @click="logout">SignOut</span>
+            <span v-else>SignIn</span>
+          </client-only>
         </v-btn>
       </nuxt-link>
     </v-app-bar>

@@ -11,7 +11,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: '%s - P2P',
+    titleTemplate: '%s - Pictorial',
     meta: [
       {
         charset: 'utf-8',
