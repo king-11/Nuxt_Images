@@ -1,7 +1,15 @@
 <template>
   <v-container fluid>
-    <v-layout wrap align-center justify-space-around>
-      <v-flex v-for="n in 9" :key="n" class="py-2 px-1" lg3 md4 sm6 xs12>
+    <v-row align="center" justify="space-around">
+      <v-col
+        v-for="n in 9"
+        :key="n"
+        class="py-2 px-1"
+        lg="3"
+        md="4"
+        sm="6"
+        cols="12"
+      >
         <v-lazy
           min-height="200"
           :options="{
@@ -45,7 +53,7 @@
             </v-card>
           </v-hover>
         </v-lazy>
-      </v-flex>
+      </v-col>
       <v-btn
         v-if="this.$auth.loggedIn"
         color="pink"
@@ -58,7 +66,7 @@
       >
         <v-icon>{{ mdiPlus }}</v-icon>
       </v-btn>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 <script lang="ts">
