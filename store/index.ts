@@ -43,11 +43,11 @@ export const mutations: MutationTree<State> = {
 }
 
 export const actions: ActionTree<State, State> = {
-  async logout({ commit }) {
+  async logout() {
     await auth.signOut()
     this.$axios.setHeader('Authorization', false)
   },
-  async loginGithub() {
+  async loginGithub({ commit }) {
     try {
       const user = await auth.signInWithPopup(github)
       return user.user
@@ -55,7 +55,7 @@ export const actions: ActionTree<State, State> = {
       firebaseAuthError.call(this, err)
     }
   },
-  async loginGoogle() {
+  async loginGoogle({ commit }) {
     try {
       const user = await auth.signInWithPopup(google)
       return user.user
@@ -63,7 +63,7 @@ export const actions: ActionTree<State, State> = {
       firebaseAuthError.call(this, err)
     }
   },
-  async loginFacebook() {
+  async loginFacebook({ commit }) {
     try {
       const user = await auth.signInWithPopup(facebook)
       return user.user
@@ -95,6 +95,7 @@ export const actions: ActionTree<State, State> = {
       })
       return user.user
     } catch (err) {
+      console.error(err)
       firebaseAuthError.call(this, err)
     }
   },
@@ -109,6 +110,11 @@ function firebaseAuthError(this: Store<State>, err: FirebaseError) {
   } else if (err.code === 'auth/account-exists-with-different-credential') {
     this.commit('displaySnackbar', {
       message: 'Account already exists with a different provider',
+      color: 'pink',
+    })
+  } else if (err.code === 'auth/invalid-email') {
+    this.commit('displaySnackbar', {
+      message: 'Invalid Email Address',
       color: 'pink',
     })
   }

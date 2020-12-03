@@ -152,12 +152,21 @@ export default Vue.extend({
       }
       this.$store.dispatch('emailLogin', credentials).then(this.apiConnect)
     },
-    async apiConnect(user: User) {
+    async apiConnect(user: User | undefined) {
+      if (!user) return
+
       const idToken = await user.getIdToken()
 
-      await this.$auth.loginWith('local', {
-        data: { id_token: idToken },
-      })
+      await this.$auth
+        .loginWith('local', {
+          data: { id_token: idToken },
+        })
+        .catch(() => {
+          this.$store.commit('displaySnackbar', {
+            color: 'red',
+            message: 'No such Account exists',
+          })
+        })
     },
   },
   head: {
