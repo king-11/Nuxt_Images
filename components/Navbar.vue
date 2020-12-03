@@ -9,7 +9,7 @@
             </v-icon>
           </v-avatar>
           <client-only>
-            <v-list v-if="this.$auth.loggedIn">
+            <v-list v-show="this.$auth.loggedIn">
               <v-list-item v-for="(item, key) in this.$auth.user" :key="item">
                 <v-list-item-content>
                   <v-list-item-title>{{ item }}</v-list-item-title>
@@ -55,20 +55,21 @@
         <span class="subheading font-weight-light">Hub</span>
       </v-toolbar-title>
       <v-spacer />
-      <nuxt-link
-        :to="this.$auth.loggedIn ? '/' : '/login'"
-        style="text-decoration: none"
-      >
-        <v-btn depressed outlined class="pink white--text">
+      <client-only>
+        <v-btn
+          depressed
+          outlined
+          class="pink white--text"
+          exact
+          :to="this.$auth.loggedIn ? '/' : '/login'"
+        >
           <v-icon left>
             {{ mdiExitToApp }}
           </v-icon>
-          <client-only>
-            <span v-if="this.$auth.loggedIn" @click="logout">SignOut</span>
-            <span v-else>SignIn</span>
-          </client-only>
+          <span v-show="this.$auth.loggedIn" @click="logout">SignOut</span>
+          <span v-show="!this.$auth.loggedIn">SignIn</span>
         </v-btn>
-      </nuxt-link>
+      </client-only>
     </v-app-bar>
   </nav>
 </template>

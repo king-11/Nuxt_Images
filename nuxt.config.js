@@ -143,12 +143,6 @@ export default {
   build: {
     extractCSS: true,
   },
-  cookie: {
-    prefix: 'auth.',
-    options: {
-      sameSite: true,
-    },
-  },
   pageTransition: {
     name: 'fade',
     mode: 'out-in',
@@ -176,4 +170,5 @@ export default {
     UserAgent: '*',
     Allow: '*',
   },
+  middleware: ['auth'],
 }

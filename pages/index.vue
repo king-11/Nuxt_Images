@@ -54,18 +54,20 @@
           </v-hover>
         </v-lazy>
       </v-col>
-      <v-btn
-        v-if="this.$auth.loggedIn"
-        color="pink"
-        dark
-        x-large
-        fixed
-        bottom
-        right
-        fab
-      >
-        <v-icon>{{ mdiPlus }}</v-icon>
-      </v-btn>
+      <nuxt-link exact to="/upload" style="text-decoration: none">
+        <v-btn
+          v-if="this.$auth.loggedIn"
+          color="pink"
+          dark
+          x-large
+          fixed
+          bottom
+          right
+          fab
+        >
+          <v-icon>{{ mdiPlus }}</v-icon>
+        </v-btn>
+      </nuxt-link>
     </v-row>
   </v-container>
 </template>
@@ -89,6 +91,7 @@ export default Vue.extend({
       },
     ],
   },
+  auth: false,
 })
 </script>
 
