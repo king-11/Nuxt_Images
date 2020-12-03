@@ -1,0 +1,21 @@
+name: Hourly Cron
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping_bot:
+    runs-on: ubuntu-latest
+
+    name: Keep the heroku server running
+    steps:
+      - uses: actions/checkout@v2
+      - name: Ping Backend Server
+        env:
+          URL: ${{ secrets.SERVER }}
+        run: |
+          curl --silent --show-error --fail \
+          -G $URL
+        shell: bash
