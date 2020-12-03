@@ -47,7 +47,7 @@
         </v-lazy>
       </v-flex>
       <v-btn
-        v-if="isAuthenticated"
+        v-if="this.$auth.loggedIn"
         color="pink"
         dark
         x-large
@@ -63,7 +63,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
 import { mdiPlus, mdiHeartOutline } from '@mdi/js'
 export default Vue.extend({
   data() {
@@ -72,7 +71,6 @@ export default Vue.extend({
       mdiHeartOutline,
     }
   },
-  computed: { ...mapGetters(['isAuthenticated']) },
   head: {
     title: 'Home',
     meta: [

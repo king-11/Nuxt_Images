@@ -90,6 +90,7 @@ import {
   mdiGithub,
   mdiEyeOff,
 } from '@mdi/js'
+import { User } from 'firebase'
 import { required, emailFormat } from '../utils/validations'
 
 export default Vue.extend({
@@ -131,10 +132,11 @@ export default Vue.extend({
     }
   },
   methods: {
-    socialAuthHandle(name: string) {
-      this.$store.dispatch(`login${name}`)
+    async socialAuthHandle(name: string) {
+      await this.$store.dispatch(`login${name}`)
+      await this.apiConnect()
     },
-    emailLogin() {
+    async emailLogin() {
       const valid = (this.$refs.emailLogin as Vue & {
         validate: () => boolean
       }).validate()
@@ -143,7 +145,21 @@ export default Vue.extend({
         email: this.email.trim(),
         password: this.password.trim(),
       }
-      this.$store.dispatch('emailLogin', credentials)
+      await this.$store.dispatch('emailLogin', credentials)
+      await this.apiConnect()
+    },
+    async apiConnect() {
+      const idToken = await (this.$store.getters
+        .firebaseUser as User).getIdToken()
+      try {
+        this.$store.commit('setUser', null)
+        const response = (await this.$auth.loginWith('local', {
+          data: { id_token: idToken },
+        })) as { data: { token: string; id: number } }
+        this.$store.commit('setToken', `Token ${response.data.token}`)
+      } catch (err) {
+        console.log(err)
+      }
     },
   },
   head: {

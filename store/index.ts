@@ -1,54 +1,67 @@
+/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FirebaseError, UserInfo } from 'firebase'
-import { MutationTree, ActionTree, Store } from 'vuex'
+import { MutationTree, ActionTree, Store, GetterTree } from 'vuex'
 import { auth, google, github, facebook } from '../utils/firebase'
+
+export interface User {
+  email: string
+  first_name: string
+  id: number
+  last_name?: string
+  username: string
+}
 
 export const strict = false
 
 interface State {
-  user: UserInfo
+  firebaseUser: UserInfo | null
   snackbar: {
     show: boolean
     color: string
     message: string
   }
+  token: string | null
 }
 
 export const state = () => ({
-  user: null,
+  firebaseUser: null,
   snackbar: {
     show: false,
     color: 'blue',
     message: '',
   },
+  token: null,
 })
 
-export const getters = {
-  isAuthenticated(state: State) {
-    return !!state.user
-  },
-
-  loggedInUser(state: State) {
-    return state.user
-  },
-
-  snackbar(state: State) {
+export const getters: GetterTree<State, State> = {
+  snackbar(state) {
     return state.snackbar
+  },
+  token(state) {
+    return state.token
+  },
+  firebaseUser(state) {
+    return state.firebaseUser
   },
 }
 
 export const mutations: MutationTree<State> = {
-  setUser(state: State, user: UserInfo) {
-    state.user = user
+  setUser(state, user: UserInfo) {
+    state.firebaseUser = user
   },
-  displaySnackbar(state: State, details: { message: string; color?: string }) {
+  setToken(state, token: string | null) {
+    state.token = token
+  },
+  displaySnackbar(state, details: { message: string; color?: string }) {
     state.snackbar = { show: true, color: 'blue', ...details }
   },
 }
 
 export const actions: ActionTree<State, State> = {
   async logout({ commit }) {
+    commit('setToken', null)
     await auth.signOut()
-    commit('setUser', null)
   },
   async loginGithub({ commit }) {
     try {
@@ -89,13 +102,29 @@ export const actions: ActionTree<State, State> = {
       firebaseAuthError.call(this, err)
     }
   },
+  async emailRegister(
+    { commit },
+    { email, password }: { email: string; password: string }
+  ) {
+    try {
+      const user = await auth.createUserWithEmailAndPassword(email, password)
+      await user.user?.sendEmailVerification()
+      commit('displaySnackbar', {
+        message: 'A verification email has been sent to your registered email',
+        color: 'pink',
+      })
+      return user
+    } catch (err) {
+      firebaseAuthError.call(this, err)
+    }
+  },
 }
 
 function firebaseAuthError(this: Store<State>, err: FirebaseError) {
   if (err.code === 'auth/user-not-found') {
     this.commit('displaySnackbar', {
       message: "User hasn't been registered yet",
-      color: 'blue',
+      color: 'pink',
     })
   } else if (err.code === 'auth/account-exists-with-different-credential') {
     this.commit('displaySnackbar', {

@@ -110,6 +110,7 @@ export default {
         home: '/',
       },
     },
+    cookie: false,
   },
   axios: {
     baseURL: 'https://wallpaper-apiv1.herokuapp.com/',

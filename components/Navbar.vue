@@ -8,14 +8,14 @@
               {{ mdiAccountCircle }}
             </v-icon>
           </v-avatar>
-          <!-- <v-list v-if="isAuthenticated">
-            <v-list-item v-for="(item, key) in loggedInUser" :key="item">
+          <v-list v-if="this.$auth.loggedIn">
+            <v-list-item v-for="(item, key) in this.$auth.user" :key="item">
               <v-list-item-content>
                 <v-list-item-title>{{ item }}</v-list-item-title>
                 <v-list-item-subtitle>{{ key }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-          </v-list>-->
+          </v-list>
         </v-col>
         <v-list-item
           v-for="item in links"
@@ -54,14 +54,14 @@
       </v-toolbar-title>
       <v-spacer />
       <nuxt-link
-        :to="isAuthenticated ? '/' : '/login'"
+        :to="this.$auth.loggedIn ? '/' : '/login'"
         style="text-decoration: none"
       >
         <v-btn depressed outlined class="pink white--text">
           <v-icon left>
             {{ mdiExitToApp }}
           </v-icon>
-          <span v-if="isAuthenticated" @click="logout">SignOut</span>
+          <span v-if="this.$auth.loggedIn" @click="logout">SignOut</span>
           <span v-else>SignIn</span>
         </v-btn>
       </nuxt-link>
@@ -70,7 +70,6 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from 'vuex'
 import Vue from 'vue'
 import {
   mdiApps,
@@ -95,10 +94,9 @@ export default Vue.extend({
       mdiApps,
     }
   },
-  computed: { ...mapGetters(['isAuthenticated', 'loggedInUser']) },
   methods: {
-    logout() {
-      this.$store.dispatch('logout')
+    async logout() {
+      await Promise.all([this.$auth.logout(), this.$store.dispatch('logout')])
     },
   },
   head: {

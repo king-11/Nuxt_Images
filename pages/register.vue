@@ -204,7 +204,10 @@ export default Vue.extend({
       const value = (this.$refs.register as Vue & {
         validate: () => boolean
       }).validate()
-      console.log(value)
+      // eslint-disable-next-line no-useless-return
+      if (!value) return
+      const credentials = { email: this.email, password: this.password }
+      this.$store.dispatch('emailRegister', credentials)
     },
   },
   head: {
