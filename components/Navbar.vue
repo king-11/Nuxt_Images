@@ -53,18 +53,18 @@
         <span class="subheading font-weight-light">Hub</span>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn
-        depressed
-        outlined
-        class="pink white--text"
+      <nuxt-link
         :to="isAuthenticated ? '/' : '/login'"
+        style="text-decoration: none"
       >
-        <v-icon left>
-          {{ mdiExitToApp }}
-        </v-icon>
-        <span v-if="isAuthenticated" @click="logout">SignOut</span>
-        <span v-else>SignIn</span>
-      </v-btn>
+        <v-btn depressed outlined class="pink white--text">
+          <v-icon left>
+            {{ mdiExitToApp }}
+          </v-icon>
+          <span v-if="isAuthenticated" @click="logout">SignOut</span>
+          <span v-else>SignIn</span>
+        </v-btn>
+      </nuxt-link>
     </v-app-bar>
   </nav>
 </template>

@@ -201,7 +201,10 @@ export default Vue.extend({
       this.lastName = user.user.displayName.split(' ').slice(1).join(' ')
     },
     register() {
-      ;(this.$refs.register as Vue & { validate: () => boolean }).validate()
+      const value = (this.$refs.register as Vue & {
+        validate: () => boolean
+      }).validate()
+      console.log(value)
     },
   },
   head: {

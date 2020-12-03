@@ -21,6 +21,9 @@ export default {
         content: 'width=device-width, initial-scale=1',
       },
       {
+        lang: 'en',
+      },
+      {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || '',
@@ -31,6 +34,14 @@ export default {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://cdn.jsdelivr.net/',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://picsum.photos/',
       },
     ],
   },
@@ -66,6 +77,8 @@ export default {
     '@nuxtjs/auth',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
   /*
    ** Axios module configuration
@@ -136,5 +149,28 @@ export default {
   pageTransition: {
     name: 'fade',
     mode: 'out-in',
+  },
+  sitemap: {
+    hostname: 'https://pictorial.netlify.app/',
+    gzip: true,
+    trailingSlash: false,
+  },
+  pwa: {
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: 'https://picsum.photos/*',
+          handler: 'cacheFirst',
+          method: 'GET',
+        },
+      ],
+    },
+  },
+  generate: {
+    crawler: true,
+  },
+  robots: {
+    UserAgent: '*',
+    Allow: '*',
   },
 }
