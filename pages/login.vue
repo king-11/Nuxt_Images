@@ -131,15 +131,21 @@ export default Vue.extend({
       ],
     }
   },
+  computed: {
+    form() {
+      return this.$refs.emailLogin as Vue & {
+        validate: () => boolean
+        reset: () => void
+      }
+    },
+  },
   methods: {
     socialAuthHandle(name: string) {
       this.$store.dispatch(`login${name}`).then(this.apiConnect)
     },
     emailLogin() {
-      const valid = (this.$refs.emailLogin as Vue & {
-        validate: () => boolean
-      }).validate()
-      if (valid) return
+      const valid = this.form.validate()
+      if (!valid) return
       const credentials = {
         email: this.email.trim(),
         password: this.password.trim(),

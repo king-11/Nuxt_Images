@@ -191,6 +191,12 @@ export default Vue.extend({
       const pass = (this as unknown) as { password: string }
       return [equality('Password', pass.password)]
     },
+    form() {
+      return this.$refs.register as Vue & {
+        validate: () => boolean
+        reset: () => void
+      }
+    },
   },
   methods: {
     async socialAuthHandle(name: string) {
@@ -200,11 +206,8 @@ export default Vue.extend({
       this.firstName = user.user.displayName.split(' ')[0]
       this.lastName = user.user.displayName.split(' ').slice(1).join(' ')
     },
-    register() {
-      const value = (this.$refs.register as Vue & {
-        validate: () => boolean
-      }).validate()
-      // eslint-disable-next-line no-useless-return
+    async register() {
+      const value = this.form.validate()
       if (!value) return
       const credentials = { email: this.email, password: this.password }
       this.$store.dispatch('emailRegister', credentials)
