@@ -132,11 +132,10 @@ export default Vue.extend({
     }
   },
   methods: {
-    async socialAuthHandle(name: string) {
-      await this.$store.dispatch(`login${name}`)
-      await this.apiConnect()
+    socialAuthHandle(name: string) {
+      this.$store.dispatch(`login${name}`).then(this.apiConnect)
     },
-    async emailLogin() {
+    emailLogin() {
       const valid = (this.$refs.emailLogin as Vue & {
         validate: () => boolean
       }).validate()
@@ -145,21 +144,14 @@ export default Vue.extend({
         email: this.email.trim(),
         password: this.password.trim(),
       }
-      await this.$store.dispatch('emailLogin', credentials)
-      await this.apiConnect()
+      this.$store.dispatch('emailLogin', credentials).then(this.apiConnect)
     },
-    async apiConnect() {
-      const idToken = await (this.$store.getters
-        .firebaseUser as User).getIdToken()
-      try {
-        this.$store.commit('setUser', null)
-        const response = (await this.$auth.loginWith('local', {
-          data: { id_token: idToken },
-        })) as { data: { token: string; id: number } }
-        this.$store.commit('setToken', `Token ${response.data.token}`)
-      } catch (err) {
-        console.log(err)
-      }
+    async apiConnect(user: User) {
+      const idToken = await user.getIdToken()
+
+      await this.$auth.loginWith('local', {
+        data: { id_token: idToken },
+      })
     },
   },
   head: {

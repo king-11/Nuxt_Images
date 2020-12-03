@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FirebaseError, UserInfo } from 'firebase'
+import { FirebaseError } from 'firebase'
 import { MutationTree, ActionTree, Store, GetterTree } from 'vuex'
 import { auth, google, github, facebook } from '../utils/firebase'
 
@@ -15,44 +15,28 @@ export interface User {
 export const strict = false
 
 interface State {
-  firebaseUser: UserInfo | null
   snackbar: {
     show: boolean
     color: string
     message: string
   }
-  token: string | null
 }
 
 export const state = () => ({
-  firebaseUser: null,
   snackbar: {
     show: false,
     color: 'blue',
     message: '',
   },
-  token: null,
 })
 
 export const getters: GetterTree<State, State> = {
   snackbar(state) {
     return state.snackbar
   },
-  token(state) {
-    return state.token
-  },
-  firebaseUser(state) {
-    return state.firebaseUser
-  },
 }
 
 export const mutations: MutationTree<State> = {
-  setUser(state, user: UserInfo) {
-    state.firebaseUser = user
-  },
-  setToken(state, token: string | null) {
-    state.token = token
-  },
   displaySnackbar(state, details: { message: string; color?: string }) {
     state.snackbar = { show: true, color: 'blue', ...details }
   },
@@ -60,32 +44,29 @@ export const mutations: MutationTree<State> = {
 
 export const actions: ActionTree<State, State> = {
   async logout({ commit }) {
-    commit('setToken', null)
     await auth.signOut()
+    this.$axios.setHeader('Authorization', false)
   },
-  async loginGithub({ commit }) {
+  async loginGithub() {
     try {
       const user = await auth.signInWithPopup(github)
-      commit('setUser', user.user)
-      return user
+      return user.user
     } catch (err) {
       firebaseAuthError.call(this, err)
     }
   },
-  async loginGoogle({ commit }) {
+  async loginGoogle() {
     try {
       const user = await auth.signInWithPopup(google)
-      commit('setUser', user.user)
-      return user
+      return user.user
     } catch (err) {
       firebaseAuthError.call(this, err)
     }
   },
-  async loginFacebook({ commit }) {
+  async loginFacebook() {
     try {
       const user = await auth.signInWithPopup(facebook)
-      commit('setUser', user.user)
-      return user
+      return user.user
     } catch (err) {
       firebaseAuthError.call(this, err)
     }
@@ -96,8 +77,7 @@ export const actions: ActionTree<State, State> = {
   ) {
     try {
       const user = await auth.signInWithEmailAndPassword(email, password)
-      commit('setUser', user.user)
-      return user
+      return user.user
     } catch (err) {
       firebaseAuthError.call(this, err)
     }
@@ -113,7 +93,7 @@ export const actions: ActionTree<State, State> = {
         message: 'A verification email has been sent to your registered email',
         color: 'pink',
       })
-      return user
+      return user.user
     } catch (err) {
       firebaseAuthError.call(this, err)
     }

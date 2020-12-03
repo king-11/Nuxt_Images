@@ -96,6 +96,8 @@ export default Vue.extend({
   },
   methods: {
     async logout() {
+      this.$auth.setToken('local', '')
+      this.$auth.setRefreshToken('local', '')
       await Promise.all([this.$auth.logout(), this.$store.dispatch('logout')])
     },
   },
