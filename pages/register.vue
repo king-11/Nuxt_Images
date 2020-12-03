@@ -93,7 +93,9 @@
               </div>
             </transition>
             <div class="buttonContainer">
-              <v-btn type="submit" class="pink--text darken-1"> Login </v-btn>
+              <v-btn type="submit" class="pink--text darken-1">
+                Register
+              </v-btn>
             </div>
           </v-form>
         </div>
@@ -101,7 +103,7 @@
       </v-col>
       <v-col cols="12" sm="12" md="5" lg="4">
         <p class="text-center text-subtitle text-md-h6">
-          Login using social media to get quick access
+          Register using social media to get quick access
         </p>
         <div class="buttonContainer mt-10">
           <v-btn
@@ -112,7 +114,9 @@
             class="white--text my-3"
             @click.native="socialAuthHandle(content.name)"
           >
-            <span class="text-capitalize">Signin with {{ content.name }}</span>
+            <span class="text-capitalize"
+              >Register with {{ content.name }}</span
+            >
             <v-icon right>
               {{ content.icon }}
             </v-icon>
@@ -125,6 +129,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { User } from 'firebase'
 import {
   mdiEmail,
   mdiEye,
@@ -157,6 +162,7 @@ export default Vue.extend({
       confirmPassword: '',
       firstName: '',
       lastName: '',
+      idToken: '',
       socialAuth: false,
       emailRules: [emailFormat(), required('Email')],
       passwordRules: [required('Password'), minLength('Password', 8)],
@@ -200,17 +206,40 @@ export default Vue.extend({
   },
   methods: {
     async socialAuthHandle(name: string) {
-      const user = await this.$store.dispatch(`login${name}`)
+      const user = (await this.$store.dispatch(`login${name}`)) as User
+      if (!user) return
       this.socialAuth = true
-      this.email = user.user.email
-      this.firstName = user.user.displayName.split(' ')[0]
-      this.lastName = user.user.displayName.split(' ').slice(1).join(' ')
+      this.email = user.email || ' '
+      this.firstName = user.displayName?.split(' ')[0] || 'Default'
+      this.lastName = user.displayName?.split(' ').slice(1).join(' ') || ' '
+      this.idToken = await user.getIdToken()
     },
     async register() {
       const value = this.form.validate()
       if (!value) return
-      const credentials = { email: this.email, password: this.password }
-      this.$store.dispatch('emailRegister', credentials)
+
+      if (!this.socialAuth) {
+        const credentials = { email: this.email, password: this.password }
+        const user = (await this.$store.dispatch(
+          'emailRegister',
+          credentials
+        )) as User | null
+        if (!user) return
+        this.idToken = await user.getIdToken()
+      }
+
+      await this.$axios.$post('auth/register/', {
+        id_token: this.idToken,
+        first_name: this.firstName,
+        last_name: this.lastName || ' ',
+      })
+
+      this.form.reset()
+      if (this.socialAuth) {
+        await this.$auth.loginWith('local', {
+          data: { id_token: this.idToken },
+        })
+      }
     },
   },
   head: {
