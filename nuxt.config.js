@@ -36,7 +36,7 @@ export default {
         href: '/favicon.ico',
       },
       {
-        rel: 'preconnect',
+        rel: 'dns-fetch',
         href: 'https://cdn.jsdelivr.net/',
       },
       {
@@ -140,7 +140,9 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    extractCSS: true,
+  },
   cookie: {
     prefix: 'auth.',
     options: {
