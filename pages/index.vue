@@ -45,7 +45,7 @@
                   </v-row>
                 </template>
               </v-img>
-              <v-btn large icon fab right absolute>
+              <v-btn aria-label="like" large icon fab right absolute>
                 <v-icon color="pink">
                   {{ mdiHeartOutline }}
                 </v-icon>
@@ -54,20 +54,18 @@
           </v-hover>
         </v-lazy>
       </v-col>
-      <nuxt-link exact to="/upload" style="text-decoration: none">
-        <v-btn
-          v-if="this.$auth.loggedIn"
-          color="pink"
-          dark
-          x-large
-          fixed
-          bottom
-          right
-          fab
+      <client-only>
+        <nuxt-link
+          v-show="this.$auth.loggedIn"
+          exact
+          to="/upload"
+          style="text-decoration: none"
         >
-          <v-icon>{{ mdiPlus }}</v-icon>
-        </v-btn>
-      </nuxt-link>
+          <v-btn color="pink darken-1" dark x-large fixed bottom right fab>
+            <v-icon>{{ mdiPlus }}</v-icon>
+          </v-btn>
+        </nuxt-link>
+      </client-only>
     </v-row>
   </v-container>
 </template>

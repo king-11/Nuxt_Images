@@ -107,7 +107,7 @@ Header
     font-size: 36px;
     margin-bottom: 6px;
     opacity: 0.9;
-    color: rgba(213, 24, 59, 0.8);
+    color: #d81b60;
     text-shadow: 1px 2px rgba($color: #fff, $alpha: 0.7);
   }
 
@@ -116,7 +116,7 @@ Header
     font-size: 18px;
     opacity: 0.7;
     margin-bottom: 100px;
-    color: #c40e4adb;
+    color: #d81b60;
     text-shadow: -0.1px -1px white;
   }
 

@@ -10,7 +10,9 @@
         <div>
           <p class="text-center text-body-2 text--secondary">
             Have an account?
-            <nuxt-link to="/login" exact=""> Login Now! </nuxt-link>
+            <nuxt-link to="/login" exact class="text--secondary">
+              Login Now!
+            </nuxt-link>
           </p>
         </div>
         <div class="my-8 form-container mx-auto">
@@ -25,12 +27,12 @@
               label="First Name"
               :rules="nameRules"
             >
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
             <v-text-field v-model="lastName" label="Last Name">
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
@@ -40,7 +42,7 @@
               :rules="emailRules"
               :readonly="socialAuth"
             >
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
@@ -52,12 +54,13 @@
                   :type="passwordShow ? 'text' : 'password'"
                   :rules="passwordRules"
                 >
-                  <v-icon slot="prepend" color="pink">
+                  <v-icon slot="prepend" color="pink darken-1">
                     {{ icons.mdiDominoMask }}
                   </v-icon>
                   <v-icon
                     slot="append"
                     color="pink"
+                    aria-label="password show hide"
                     @click="passwordShow = !passwordShow"
                   >
                     <slot v-if="passwordShow">
@@ -74,12 +77,13 @@
                   :type="confirmPasswordShow ? 'text' : 'password'"
                   :rules="confirmPasswordRules"
                 >
-                  <v-icon slot="prepend" color="pink">
+                  <v-icon slot="prepend" color="pink darken-1">
                     {{ icons.mdiDominoMask }}
                   </v-icon>
                   <v-icon
                     slot="append"
-                    color="pink"
+                    color="pink darken-1"
+                    aria-label="password show hide"
                     @click="confirmPasswordShow = !confirmPasswordShow"
                   >
                     <slot v-if="confirmPasswordShow">
@@ -93,7 +97,7 @@
               </div>
             </transition>
             <div class="buttonContainer">
-              <v-btn type="submit" class="pink--text darken-1">
+              <v-btn type="submit" class="pink--text text--darken-1">
                 Register
               </v-btn>
             </div>

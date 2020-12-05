@@ -25,7 +25,7 @@
       </template>
     </v-snackbar>
     <v-footer padless>
-      <v-col class="text-center pink white--text" cols="12">
+      <v-col class="text-center pink darken-1 white--text" cols="12">
         &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
       </v-col>
     </v-footer>
