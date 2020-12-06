@@ -10,49 +10,38 @@
         sm="6"
         cols="12"
       >
-        <v-lazy
-          min-height="200"
-          :options="{
-            threshold: 0.7,
-          }"
-          transition="fade-transition"
-        >
-          <v-hover v-slot="{ hover }">
-            <v-card tile class="d-flex flex-column">
-              <v-img
-                :src="`https://picsum.photos/seed/${n}/500/300`"
-                :lazy-src="`https://picsum.photos/seed/${n}/500/300`"
-                aspect-ratio="1"
-                class="grey lighten-2"
-              >
-                <v-expand-transition>
-                  <div
-                    v-if="hover"
-                    class="d-flex transition-fast-in-out black darken-2 v-card--reveal display-2 white--text"
-                    style="height: 100%"
-                  >
-                    <div>nimeria</div>
-                    <div>paryatak</div>
-                  </div>
-                </v-expand-transition>
-                <template #placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular indeterminate color="grey lighten-5" />
-                  </v-row>
-                </template>
-              </v-img>
-              <v-btn aria-label="like" large icon fab right absolute>
-                <v-icon color="pink">
-                  {{ mdiHeartOutline }}
-                </v-icon>
-              </v-btn>
-            </v-card>
-          </v-hover>
-        </v-lazy>
+        <v-hover v-slot="{ hover }">
+          <v-card tile class="d-flex flex-column">
+            <v-img
+              loading="lazy"
+              :src="`https://picsum.photos/seed/${n}/500/300`"
+              :lazy-src="`https://picsum.photos/seed/${n}/500/300`"
+              aspect-ratio="1"
+              class="grey lighten-2"
+            >
+              <v-expand-transition>
+                <div
+                  v-if="hover"
+                  class="d-flex transition-fast-in-out black darken-2 v-card--reveal display-2 white--text"
+                  style="height: 100%"
+                >
+                  <div>nimeria</div>
+                  <div>paryatak</div>
+                </div>
+              </v-expand-transition>
+              <template #placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5" />
+                </v-row>
+              </template>
+            </v-img>
+            <v-btn aria-label="like" large icon fab right absolute>
+              <v-icon color="pink">
+                {{ mdiHeartOutline }}
+              </v-icon>
+            </v-btn>
+          </v-card>
+        </v-hover>
       </v-col>
       <client-only>
         <nuxt-link
