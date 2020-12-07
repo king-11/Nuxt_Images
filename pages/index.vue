@@ -59,19 +59,19 @@
           </v-card>
         </v-hover>
       </v-col>
-      <client-only>
-        <nuxt-link
-          v-show="this.$auth.loggedIn"
-          exact
-          to="/upload"
-          style="text-decoration: none"
-        >
-          <v-btn color="pink darken-1" dark x-large fixed bottom right fab>
-            <v-icon>{{ mdiPlus }}</v-icon>
-          </v-btn>
-        </nuxt-link>
-      </client-only>
     </v-row>
+    <client-only>
+      <nuxt-link
+        v-show="$auth.loggedIn"
+        exact
+        to="/upload"
+        style="text-decoration: none"
+      >
+        <v-btn color="pink darken-1" dark x-large fixed bottom right fab>
+          <v-icon>{{ mdiPlus }}</v-icon>
+        </v-btn>
+      </nuxt-link>
+    </client-only>
   </v-container>
 </template>
 <script lang="ts">
