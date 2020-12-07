@@ -2,7 +2,7 @@
   <v-app>
     <Navbar />
     <v-main>
-      <Nuxt />
+      <Nuxt keep-alive />
     </v-main>
     <v-snackbar
       v-if="snackbar.show"

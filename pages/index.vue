@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row align="center" justify="space-around">
+    <v-row v-if="$fetchState.pending" align="center" justify="space-around">
       <v-col
         v-for="n in 9"
         :key="n"
@@ -10,23 +10,39 @@
         sm="6"
         cols="12"
       >
+        <v-skeleton-loader
+          class="mx-auto"
+          max-width="300"
+          type="card"
+        ></v-skeleton-loader>
+      </v-col>
+    </v-row>
+    <v-row v-else align="center" justify="space-around">
+      <v-col
+        v-for="image in images"
+        :key="image.id"
+        class="py-2 px-1"
+        lg="3"
+        md="4"
+        sm="6"
+        cols="12"
+      >
         <v-hover v-slot="{ hover }">
-          <v-card tile class="d-flex flex-column">
+          <v-card tile class="d-flex flex-column flex-grow-1">
             <v-img
               loading="lazy"
-              :src="`https://picsum.photos/seed/${n}/500/300`"
-              :lazy-src="`https://picsum.photos/seed/${n}/500/300`"
+              :src="image.link"
               aspect-ratio="1"
               class="grey lighten-2"
             >
               <v-expand-transition>
                 <div
                   v-if="hover"
-                  class="d-flex transition-fast-in-out black darken-2 v-card--reveal display-2 white--text"
+                  class="d-flex transition-fast-in-out black darken-2 v-card--reveal white--text"
                   style="height: 100%"
                 >
-                  <div>nimeria</div>
-                  <div>paryatak</div>
+                  <div class="text-h4">{{ image.place }}</div>
+                  <div class="text-h5">By : {{ image.name | getId }}</div>
                 </div>
               </v-expand-transition>
               <template #placeholder>
@@ -61,12 +77,34 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mdiPlus, mdiHeartOutline } from '@mdi/js'
+
+interface Data {
+  mdiPlus: string
+  mdiHeartOutline: string
+  images: any
+}
+
 export default Vue.extend({
-  data() {
+  filters: {
+    getId: (val: string) => val.slice(26, -1),
+  },
+  data(): Data {
     return {
       mdiPlus,
       mdiHeartOutline,
+      images: [],
     }
+  },
+  async fetch() {
+    const response = await this.$axios.$get('/api')
+    response.results.forEach((val: any) => {
+      this.images.push({
+        link: val.link,
+        id: val.id,
+        name: val.person.instaHandle || val.person.name,
+        place: val.place,
+      })
+    })
   },
   head: {
     title: 'Home',
