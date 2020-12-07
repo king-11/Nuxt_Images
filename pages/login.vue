@@ -19,7 +19,7 @@
           <v-form
             ref="emailLogin"
             v-model="valid"
-            lazy-validationr
+            lazy-validation
             @submit.prevent="emailLogin"
           >
             <v-text-field v-model="email" label="Email" :rules="emailRules">
@@ -188,29 +188,4 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
-.form-container {
-  max-width: 600px;
-}
-
-.parallax {
-  height: 100vh;
-  width: 100vw;
-  background-image: url('~static/images/background.webp');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  .col-12 {
-    -webkit-backdrop-filter: blur(7px);
-    backdrop-filter: blur(7px);
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped src="../assets/scss/form.scss" lang="scss"></style>

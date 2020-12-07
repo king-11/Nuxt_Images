@@ -19,7 +19,7 @@
           <v-form
             ref="register"
             v-model="valid"
-            lazy-validationr
+            lazy-validation
             @submit.prevent="register"
           >
             <v-text-field
@@ -103,7 +103,6 @@
             </div>
           </v-form>
         </div>
-        <v-divider class="hidden-md-and-up" />
       </v-col>
       <v-col cols="12" sm="12" md="5" lg="4">
         <p class="text-center text-subtitle text-md-h6">
@@ -133,7 +132,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { User } from 'firebase'
 import {
   mdiEmail,
   mdiEye,
@@ -143,6 +141,7 @@ import {
   mdiGithub,
   mdiEyeOff,
 } from '@mdi/js'
+import { User } from 'firebase'
 import {
   required,
   emailFormat,
@@ -260,29 +259,4 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
-.form-container {
-  max-width: 600px;
-}
-
-.parallax {
-  height: 100vh;
-  width: 100vw;
-  background-image: url('~static/images/background.webp');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  .col-12 {
-    -webkit-backdrop-filter: blur(7px);
-    backdrop-filter: blur(7px);
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped src="../assets/scss/form.scss" lang="scss"></style>

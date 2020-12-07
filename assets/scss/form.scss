@@ -1,0 +1,24 @@
+.form-container {
+  max-width: 600px;
+}
+
+.parallax {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('~static/images/background.webp');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .col-12 {
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+}
