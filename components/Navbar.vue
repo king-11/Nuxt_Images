@@ -100,13 +100,6 @@ export default Vue.extend({
       mdiApps,
     }
   },
-  methods: {
-    async logout() {
-      this.$auth.setToken('local', '')
-      this.$auth.setRefreshToken('local', '')
-      await Promise.all([this.$auth.logout(), this.$store.dispatch('logout')])
-    },
-  },
   head: {
     title: 'Login',
     meta: [
@@ -116,6 +109,13 @@ export default Vue.extend({
         content: 'Social Auth login page for wallpaper hub',
       },
     ],
+  },
+  methods: {
+    async logout() {
+      this.$auth.setToken('local', '')
+      this.$auth.setRefreshToken('local', '')
+      await Promise.all([this.$auth.logout(), this.$store.dispatch('logout')])
+    },
   },
 })
 </script>

@@ -136,6 +136,16 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: 'Login',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Login Page',
+      },
+    ],
+  },
   computed: {
     form() {
       return this.$refs.emailLogin as Vue & {
@@ -174,17 +184,6 @@ export default Vue.extend({
         })
     },
   },
-  head: {
-    title: 'Login',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Wallpaper Hub Login Page',
-      },
-    ],
-  },
-  auth: 'guest',
 })
 </script>
 

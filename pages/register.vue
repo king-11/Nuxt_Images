@@ -195,6 +195,16 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: 'Register',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Register Page',
+      },
+    ],
+  },
   computed: {
     confirmPasswordRules() {
       const pass = (this as unknown) as { password: string }
@@ -245,17 +255,6 @@ export default Vue.extend({
       }
     },
   },
-  head: {
-    title: 'Register',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Wallpaper Hub Register Page',
-      },
-    ],
-  },
-  auth: 'guest',
 })
 </script>
 
