@@ -120,7 +120,7 @@ export default {
   },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    treeShake: true,
+    treeShake: { loaderOptions: { registerStylesSSR: true } },
     defaultAssets: false,
     icons: {
       iconfont: 'mdiSvg',

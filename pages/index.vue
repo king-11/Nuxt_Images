@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row v-if="$fetchState.pending" align="center" justify="space-around">
       <v-col
-        v-for="n in 9"
+        v-for="n in 4"
         :key="n"
         class="py-2 px-1"
         lg="3"
