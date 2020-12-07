@@ -10,14 +10,16 @@
         <div>
           <p class="text-center text-body-2 text--secondary">
             Have an account?
-            <nuxt-link to="/login" exact=""> Login Now! </nuxt-link>
+            <nuxt-link to="/login" exact class="text--secondary">
+              Login Now!
+            </nuxt-link>
           </p>
         </div>
         <div class="my-8 form-container mx-auto">
           <v-form
             ref="register"
             v-model="valid"
-            lazy-validationr
+            lazy-validation
             @submit.prevent="register"
           >
             <v-text-field
@@ -25,12 +27,12 @@
               label="First Name"
               :rules="nameRules"
             >
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
             <v-text-field v-model="lastName" label="Last Name">
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
@@ -40,7 +42,7 @@
               :rules="emailRules"
               :readonly="socialAuth"
             >
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
@@ -52,12 +54,13 @@
                   :type="passwordShow ? 'text' : 'password'"
                   :rules="passwordRules"
                 >
-                  <v-icon slot="prepend" color="pink">
+                  <v-icon slot="prepend" color="pink darken-1">
                     {{ icons.mdiDominoMask }}
                   </v-icon>
                   <v-icon
                     slot="append"
                     color="pink"
+                    aria-label="password show hide"
                     @click="passwordShow = !passwordShow"
                   >
                     <slot v-if="passwordShow">
@@ -74,12 +77,13 @@
                   :type="confirmPasswordShow ? 'text' : 'password'"
                   :rules="confirmPasswordRules"
                 >
-                  <v-icon slot="prepend" color="pink">
+                  <v-icon slot="prepend" color="pink darken-1">
                     {{ icons.mdiDominoMask }}
                   </v-icon>
                   <v-icon
                     slot="append"
-                    color="pink"
+                    color="pink darken-1"
+                    aria-label="password show hide"
                     @click="confirmPasswordShow = !confirmPasswordShow"
                   >
                     <slot v-if="confirmPasswordShow">
@@ -93,13 +97,12 @@
               </div>
             </transition>
             <div class="buttonContainer">
-              <v-btn type="submit" class="pink--text darken-1">
+              <v-btn type="submit" class="pink--text text--darken-1">
                 Register
               </v-btn>
             </div>
           </v-form>
         </div>
-        <v-divider class="hidden-md-and-up" />
       </v-col>
       <v-col cols="12" sm="12" md="5" lg="4">
         <p class="text-center text-subtitle text-md-h6">
@@ -129,7 +132,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { User } from 'firebase'
 import {
   mdiEmail,
   mdiEye,
@@ -139,6 +141,7 @@ import {
   mdiGithub,
   mdiEyeOff,
 } from '@mdi/js'
+import { User } from 'firebase'
 import {
   required,
   emailFormat,
@@ -192,6 +195,16 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: 'Register',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Register Page',
+      },
+    ],
+  },
   computed: {
     confirmPasswordRules() {
       const pass = (this as unknown) as { password: string }
@@ -242,43 +255,7 @@ export default Vue.extend({
       }
     },
   },
-  head: {
-    title: 'Register',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Wallpaper Hub Register Page',
-      },
-    ],
-  },
-  auth: 'guest',
 })
 </script>
 
-<style lang="scss" scoped>
-.form-container {
-  max-width: 600px;
-}
-
-.parallax {
-  height: 100vh;
-  width: 100vw;
-  background-image: url('~static/images/background.webp');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  .col-12 {
-    -webkit-backdrop-filter: blur(7px);
-    backdrop-filter: blur(7px);
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped src="../assets/scss/form.scss" lang="scss"></style>

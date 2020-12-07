@@ -12,6 +12,9 @@ export default {
    */
   head: {
     titleTemplate: '%s - Pictorial',
+    htmlAttrs: {
+      lang: 'en',
+    },
     meta: [
       {
         charset: 'utf-8',
@@ -37,11 +40,11 @@ export default {
       },
       {
         rel: 'dns-fetch',
-        href: 'https://cdn.jsdelivr.net/',
+        href: 'https://cdn.jsdelivr.net',
       },
       {
         rel: 'preconnect',
-        href: 'https://picsum.photos/',
+        href: 'https://picsum.photos',
       },
     ],
   },
@@ -67,6 +70,8 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // https://go.nuxtjs.dev/pwa,
+    '@nuxtjs/pwa',
   ],
   /*
    ** Nuxt.js modules
@@ -75,8 +80,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
   ],
@@ -117,7 +120,7 @@ export default {
   },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    treeShake: true,
+    treeShake: { loaderOptions: { registerStylesSSR: true } },
     defaultAssets: false,
     icons: {
       iconfont: 'mdiSvg',
@@ -150,17 +153,33 @@ export default {
   sitemap: {
     hostname: 'https://pictorial.netlify.app/',
     gzip: true,
-    trailingSlash: false,
+    trailingSlash: true,
   },
   pwa: {
     workbox: {
       runtimeCaching: [
         {
-          urlPattern: 'https://picsum.photos/*',
+          urlPattern: 'https://i.picsum.photos/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+        },
+        {
+          urlPattern: 'https://i.picsum.photos/id/.*',
           handler: 'cacheFirst',
           method: 'GET',
         },
       ],
+    },
+    manifest: {
+      name: 'Wallpaper Hub',
+      lang: 'en',
+      theme_color: '#fff',
+    },
+    meta: {
+      lang: 'en',
+      ogSiteName: 'Pictorial',
+      ogTitle: 'Wallpaper Hub',
+      author: 'Lakshya Singh',
     },
   },
   generate: {
@@ -171,4 +190,5 @@ export default {
     Allow: '*',
   },
   middleware: ['auth'],
+  loading: { color: '#D81B60' },
 }

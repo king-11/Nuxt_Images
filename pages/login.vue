@@ -10,18 +10,20 @@
         <div>
           <p class="text-center text-body-2 text--secondary">
             Don't have an account?
-            <nuxt-link to="/register" exact=""> Sign Up Now! </nuxt-link>
+            <nuxt-link to="/register" exact class="text--secondary">
+              Sign Up Now!
+            </nuxt-link>
           </p>
         </div>
         <div class="my-8 form-container mx-auto">
           <v-form
             ref="emailLogin"
             v-model="valid"
-            lazy-validationr
+            lazy-validation
             @submit.prevent="emailLogin"
           >
             <v-text-field v-model="email" label="Email" :rules="emailRules">
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
             </v-text-field>
@@ -31,12 +33,13 @@
               :type="passwordShow ? 'text' : 'password'"
               :rules="passwordRules"
             >
-              <v-icon slot="prepend" color="pink">
+              <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiDominoMask }}
               </v-icon>
               <v-icon
                 slot="append"
-                color="pink"
+                color="pink darken-1"
+                aria-label="password show hide"
                 @click="passwordShow = !passwordShow"
               >
                 <slot v-if="passwordShow">
@@ -48,7 +51,9 @@
               </v-icon>
             </v-text-field>
             <div class="buttonContainer">
-              <v-btn type="submit" class="pink--text darken-1"> Login </v-btn>
+              <v-btn type="submit" class="pink--text text--darken-1">
+                Login
+              </v-btn>
             </div>
           </v-form>
         </div>
@@ -131,6 +136,16 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: 'Login',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Wallpaper Hub Login Page',
+      },
+    ],
+  },
   computed: {
     form() {
       return this.$refs.emailLogin as Vue & {
@@ -169,43 +184,7 @@ export default Vue.extend({
         })
     },
   },
-  head: {
-    title: 'Login',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Wallpaper Hub Login Page',
-      },
-    ],
-  },
-  auth: 'guest',
 })
 </script>
 
-<style lang="scss" scoped>
-.form-container {
-  max-width: 600px;
-}
-
-.parallax {
-  height: 100vh;
-  width: 100vw;
-  background-image: url('~static/images/background.webp');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  .col-12 {
-    -webkit-backdrop-filter: blur(7px);
-    backdrop-filter: blur(7px);
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped src="../assets/scss/form.scss" lang="scss"></style>

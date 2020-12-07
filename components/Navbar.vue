@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" app fixed>
       <v-list>
         <v-col justify="space-around" align="center">
-          <v-avatar color="pink" size="70">
+          <v-avatar color="pink darken-1" size="70">
             <v-icon dark size="70">
               {{ mdiAccountCircle }}
             </v-icon>
@@ -39,7 +39,8 @@
     <v-app-bar app hide-on-scroll>
       <v-icon
         large
-        class="pink--text mr-2 mr-md-4"
+        aria-label="navbar open"
+        class="pink--text text--darken-1 mr-2 mr-md-4"
         @click.stop="drawer = !drawer"
       >
         {{ mdiApps }}
@@ -59,7 +60,7 @@
         <v-btn
           depressed
           outlined
-          class="pink white--text"
+          class="pink darken-1 white--text"
           exact
           :to="this.$auth.loggedIn ? '/' : '/login'"
         >
@@ -99,13 +100,6 @@ export default Vue.extend({
       mdiApps,
     }
   },
-  methods: {
-    async logout() {
-      this.$auth.setToken('local', '')
-      this.$auth.setRefreshToken('local', '')
-      await Promise.all([this.$auth.logout(), this.$store.dispatch('logout')])
-    },
-  },
   head: {
     title: 'Login',
     meta: [
@@ -115,6 +109,13 @@ export default Vue.extend({
         content: 'Social Auth login page for wallpaper hub',
       },
     ],
+  },
+  methods: {
+    async logout() {
+      this.$auth.setToken('local', '')
+      this.$auth.setRefreshToken('local', '')
+      await Promise.all([this.$auth.logout(), this.$store.dispatch('logout')])
+    },
   },
 })
 </script>
