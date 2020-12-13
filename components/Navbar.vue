@@ -3,17 +3,22 @@
     <v-navigation-drawer v-model="drawer" app fixed>
       <v-list>
         <v-col justify="space-around" align="center">
-          <v-avatar color="pink darken-1" size="70">
-            <v-icon dark size="70">
+          <v-avatar color="pink darken-1" size="100">
+            <v-img
+              v-if="imgSrc && this.$auth.loggedIn"
+              :src="imgSrc"
+              aspect-ratio="1"
+            ></v-img>
+            <v-icon v-else dark size="90">
               {{ mdiAccountCircle }}
             </v-icon>
           </v-avatar>
           <client-only>
-            <v-list v-show="this.$auth.loggedIn">
-              <v-list-item v-for="(item, key) in this.$auth.user" :key="item">
+            <v-list v-show="user">
+              <v-list-item v-for="(item, key) in user" :key="item">
                 <v-list-item-content>
-                  <v-list-item-title>{{ item }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ key }}</v-list-item-subtitle>
+                  <v-list-item-title>{{ key }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ item }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -25,6 +30,7 @@
           :to="item.route"
           router
           exact
+          color="pink darken-1"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -86,6 +92,8 @@ import {
   mdiPartyPopper,
 } from '@mdi/js'
 
+import { auth } from '../utils/firebase'
+
 export default Vue.extend({
   data() {
     return {
@@ -98,6 +106,7 @@ export default Vue.extend({
       mdiExitToApp,
       mdiAccountCircle,
       mdiApps,
+      imgSrc: auth.currentUser?.photoURL,
     }
   },
   head: {
@@ -109,6 +118,23 @@ export default Vue.extend({
         content: 'Social Auth login page for wallpaper hub',
       },
     ],
+  },
+  computed: {
+    user() {
+      if (!this.$auth.loggedIn) return null
+      // eslint-disable-next-line camelcase
+      const { email, first_name, last_name } = this.$auth.user
+      return {
+        Email: email,
+        // eslint-disable-next-line camelcase
+        Name: `${first_name} ${last_name}`,
+      }
+    },
+  },
+  watch: {
+    user() {
+      this.imgSrc = auth.currentUser?.photoURL
+    },
   },
   methods: {
     async logout() {
