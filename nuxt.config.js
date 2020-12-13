@@ -184,6 +184,7 @@ export default {
   },
   generate: {
     crawler: true,
+    exclude: [/^\/$/],
   },
   robots: {
     UserAgent: '*',

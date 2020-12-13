@@ -96,7 +96,7 @@ export default Vue.extend({
     }
   },
   async fetch() {
-    const response = await this.$axios.$get('/api')
+    const response = await this.$axios.$get('/api/')
     response.results.forEach((val: any) => {
       this.images.push({
         link: val.link,
