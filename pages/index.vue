@@ -51,9 +51,18 @@
                 </v-row>
               </template>
             </v-img>
-            <v-btn aria-label="like" large icon fab right absolute>
+            <v-btn
+              aria-label="Navigate to Detail Page"
+              large
+              icon
+              fab
+              right
+              absolute
+              router
+              :to="`/image/${image.id}`"
+            >
               <v-icon color="pink">
-                {{ mdiHeartOutline }}
+                {{ mdiArrowRightDropCircleOutline }}
               </v-icon>
             </v-btn>
           </v-card>
@@ -76,11 +85,11 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { mdiPlus, mdiHeartOutline } from '@mdi/js'
+import { mdiPlus, mdiArrowRightDropCircleOutline } from '@mdi/js'
 
 interface Data {
   mdiPlus: string
-  mdiHeartOutline: string
+  mdiArrowRightDropCircleOutline: string
   images: any
 }
 
@@ -91,12 +100,12 @@ export default Vue.extend({
   data(): Data {
     return {
       mdiPlus,
-      mdiHeartOutline,
+      mdiArrowRightDropCircleOutline,
       images: [],
     }
   },
   async fetch() {
-    const response = await this.$axios.$get('/api')
+    const response = await this.$axios.$get('/api/')
     response.results.forEach((val: any) => {
       this.images.push({
         link: val.link,
