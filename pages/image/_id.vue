@@ -6,6 +6,7 @@
       <v-card-subtitle>Clicked by : {{ x.person.name }}</v-card-subtitle>
       <v-card-text>
         <v-btn
+          aria-label="Facebook Share"
           color="#1877f2"
           :href="`https://www.facebook.com/sharer/sharer.php?u=${route}`"
         >
@@ -13,7 +14,8 @@
           <span class="white--text text-capitalize">Share</span>
         </v-btn>
         <v-btn
-          :href="`https://twitter.com/intent/tweet?text=An%20Amazing%20click%20by%20${x.person.instaHandle}%20find%20it%20at%20${route}`"
+          aria-label="Tweet on twitter"
+          :href="`https://twitter.com/intent/tweet?text=An%20Amazing%20click%20by%20${instaHandle}%20find%20it%20at%20${route}`"
           class="twitter-share-button"
           data-show-count="false"
           color="#1DA1F2"
@@ -24,8 +26,9 @@
           <span class="white--text text-capitalize">Tweet</span>
         </v-btn>
         <v-btn
-          v-if="x.person.instaHandle"
-          :href="x.person.instaHandle"
+          v-if="instaHandle"
+          aria-label="Follow the photographer"
+          :href="instaHandle"
           class="instagram"
         >
           <v-icon left color="white">
