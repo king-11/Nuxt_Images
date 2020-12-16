@@ -1,9 +1,28 @@
 <template>
   <v-container>
-    <v-card class="mx-auto" max-width="700">
-      <v-img loading="lazy" contain :src="x.link" />
-      <v-card-title class="text-sm-h6 text-md-h5">{{ x.place }}</v-card-title>
-      <v-card-subtitle>Clicked by : {{ x.person.name }}</v-card-subtitle>
+    <v-skeleton-loader
+      v-if="$fetchState.pending"
+      class="mx-auto"
+      type="card"
+      max-width="700"
+    ></v-skeleton-loader>
+    <v-card v-else class="mx-auto" max-width="800">
+      <v-btn
+        aria-label="Download the Image"
+        fab
+        top
+        right
+        absolute
+        class="mt-8"
+        color="pink darken-1"
+      >
+        <a :href="link" download>
+          <v-icon color="white">{{ mdiDownload }}</v-icon>
+        </a>
+      </v-btn>
+      <v-img loading="lazy" contain :src="link" />
+      <v-card-title class="text-sm-h6 text-md-h5">{{ place }}</v-card-title>
+      <v-card-subtitle>Clicked by : {{ name }}</v-card-subtitle>
       <v-card-text>
         <v-btn
           aria-label="Facebook Share"
@@ -50,7 +69,7 @@
         <v-spacer />
         <v-chip-group column>
           <v-chip
-            v-for="elem in x.tag"
+            v-for="elem in tags"
             :key="elem.name"
             color="white"
             class="pink--text text--darken-1"
@@ -66,21 +85,38 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mdiLabel, mdiTwitter, mdiInstagram, mdiFacebook } from '@mdi/js'
+import {
+  mdiLabel,
+  mdiTwitter,
+  mdiInstagram,
+  mdiFacebook,
+  mdiDownload,
+} from '@mdi/js'
 export default Vue.extend({
-  async asyncData({ $axios, params }) {
-    const id = params.id
-    const x = await $axios.$get(`/api/image/${id}/`)
-    return { id, x }
-  },
   data() {
     return {
       mdiLabel,
       mdiTwitter,
       mdiInstagram,
       mdiFacebook,
+      mdiDownload,
+      tags: [],
+      place: '',
+      link: '',
+      name: '',
+      instaHandle: '',
       route: `https://pictorial.netlify.app/${this.$route.fullPath}`,
     }
+  },
+  async fetch() {
+    const id = this.$route.params.id
+    const x = await this.$axios.$get(`/api/image/${id}/`)
+
+    this.tags = x.tag
+    this.place = x.place
+    this.name = x.person.name
+    this.instaHandle = x.person.instaHandle
+    this.link = x.link
   },
   head: {
     title: `Image`,
