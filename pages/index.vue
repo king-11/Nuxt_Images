@@ -75,27 +75,66 @@
           </v-hover>
         </v-col>
       </v-row>
-      <nuxt-link
+      <v-speed-dial
         v-show="$auth.loggedIn"
-        exact
-        to="/upload"
-        style="text-decoration: none"
+        v-model="fab"
+        bottom
+        right
+        open-on-hover
+        transition="slide-y-reverse-transition"
       >
-        <v-btn color="pink darken-1" dark x-large absolute bottom right fab>
-          <v-icon>{{ mdiPlus }}</v-icon>
-        </v-btn>
-      </nuxt-link>
+        <template #activator>
+          <v-btn v-model="fab" color="pink darken-1" large dark fab>
+            <v-icon v-if="fab"> {{ mdiClose }} </v-icon>
+            <v-icon v-else large> {{ mdiVuejs }} </v-icon>
+          </v-btn>
+        </template>
+        <nuxt-link exact to="/upload" style="text-decoration: none">
+          <v-btn fab dark class="pa-2 cyan darken-3">
+            <v-icon large>{{ mdiPlus }}</v-icon>
+          </v-btn>
+        </nuxt-link>
+        <nuxt-link exact to="/profile" style="text-decoration: none">
+          <v-btn fab dark color="pa-2 blue-grey darken-1">
+            <v-icon large>{{ mdiAccountCircle }} </v-icon>
+          </v-btn>
+        </nuxt-link>
+        <nuxt-link exact to="/collection" style="text-decoration: none">
+          <v-btn fab dark color="pa-2 amber darken-2">
+            <v-icon>{{ mdiFolderMultipleImage }} </v-icon>
+          </v-btn>
+        </nuxt-link>
+      </v-speed-dial>
     </client-only>
   </v-container>
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { mdiPlus, mdiArrowRightDropCircleOutline } from '@mdi/js'
+import {
+  mdiClose,
+  mdiAccountCircle,
+  mdiPlus,
+  mdiArrowRightDropCircleOutline,
+  mdiVuejs,
+  mdiFolderMultipleImage,
+} from '@mdi/js'
+
+interface Image {
+  link: string
+  id: string
+  name: string
+  place: string
+}
 
 interface Data {
+  mdiClose: string
+  mdiAccountCircle: string
   mdiPlus: string
   mdiArrowRightDropCircleOutline: string
-  images: any
+  mdiFolderMultipleImage: string
+  mdiVuejs: string
+  images: Image[]
+  fab: boolean
 }
 
 export default Vue.extend({
@@ -104,8 +143,13 @@ export default Vue.extend({
   },
   data(): Data {
     return {
+      fab: false,
+      mdiClose,
+      mdiAccountCircle,
+      mdiFolderMultipleImage,
       mdiPlus,
       mdiArrowRightDropCircleOutline,
+      mdiVuejs,
       images: [],
     }
   },
@@ -134,7 +178,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 .v-card--reveal {
   display: flex;
   flex-direction: column;
@@ -146,5 +190,12 @@ export default Vue.extend({
   opacity: 0.5;
   position: absolute;
   width: 100%;
+}
+.v-speed-dial {
+  position: absolute;
+}
+
+.v-btn--floating {
+  position: relative;
 }
 </style>
