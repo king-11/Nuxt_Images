@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/storage'
 
@@ -13,7 +13,14 @@ const firebaseConfig = {
   measurementId: 'G-QBDWRTV3ND',
 }
 
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig)
+}
+
+;(async function setPersistence() {
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+})()
+
 
 export const auth = firebase.auth()
 export const github = new firebase.auth.GithubAuthProvider()
