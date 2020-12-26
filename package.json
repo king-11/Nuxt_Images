@@ -20,7 +20,8 @@
     "core-js": "^3.8.1",
     "firebase": "^7.19.0",
     "nanoid": "^3.1.20",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "vue-disqus": "^4.0.1"
   },
   "devDependencies": {
     "@mdi/js": "^5.8.55",
@@ -38,6 +39,6 @@
     "eslint-plugin-prettier": "^3.3.0",
     "node-sass": "^5.0.0",
     "prettier": "^2.1.2",
-    "sass-loader": "@8.0.0"
+    "sass-loader": "~8.0.0"
   }
 }
