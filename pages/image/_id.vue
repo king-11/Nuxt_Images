@@ -70,15 +70,18 @@
         <v-chip-group column>
           <v-chip
             v-for="elem in tags"
-            :key="elem.name"
+            :key="elem"
             color="white"
             class="pink--text text--darken-1"
             column
           >
-            {{ elem.name }}
+            {{ elem }}
           </v-chip>
         </v-chip-group>
       </v-card-actions>
+      <v-container>
+        <Disqus :page-config="pageConfig" />
+      </v-container>
     </v-card>
   </v-container>
 </template>
@@ -100,6 +103,9 @@ export default Vue.extend({
       mdiInstagram,
       mdiFacebook,
       mdiDownload,
+      pageConfig: {
+        url: `https://pictorial.netlify.app/image/${this.$route.params.id}`,
+      },
       tags: [],
       place: '',
       link: '',
@@ -112,7 +118,10 @@ export default Vue.extend({
     const id = this.$route.params.id
     const x = await this.$axios.$get(`/api/image/${id}/`)
 
-    this.tags = x.tag
+    this.tags = x.tag.map(
+      ({ name }: { name: string }) =>
+        name.charAt(0).toUpperCase() + name.slice(1)
+    )
     this.place = x.place
     this.name = x.person.name
     this.instaHandle = x.person.instaHandle
@@ -132,7 +141,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 .instagram {
   background: -moz-linear-gradient(
     45deg,

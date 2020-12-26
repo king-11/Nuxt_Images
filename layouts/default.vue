@@ -24,7 +24,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-footer padless>
+    <v-footer padless app>
       <v-col class="text-center pink darken-1 white--text" cols="12">
         &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
       </v-col>
@@ -36,6 +36,7 @@
 import Vue from 'vue'
 import { mdiCloseCircleOutline } from '@mdi/js'
 import Navbar from '~/components/Navbar.vue'
+
 export default Vue.extend({
   components: {
     Navbar,
