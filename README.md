@@ -5,7 +5,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/king-11/Nuxt_Images?style=plastic)
 ![Website](https://img.shields.io/website?down_color=lightgrey&up_color=orange&up_message=live&url=https%3A%2F%2Fpictorial.netlify.app/login%2F?style=plastic)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/74e52652-57c6-4f51-bbb8-7a630358940f/deploy-status)](https://app.netlify.com/sites/pictorial/deploys)
-![Dependencies](https://img.shields.io/david/king-11/Nuxt_Images?color=lime&style=plastic)
+![CI](https://img.shields.io/github/workflow/status/king-11/Nuxt_Images/ci?color=white&label=Build&style=plastic)
 
 ## About
 
