@@ -24,10 +24,15 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-footer padless app>
-      <v-col class="text-center pink darken-1 white--text" cols="12">
-        &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
-      </v-col>
+    <v-footer app padless>
+      <v-row class="justify-space-around pb-1">
+        <v-col class="text-center pink darken-1 white--text">
+          &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
+        </v-col>
+        <v-col class="text-center pink darken-1 white--text">
+          Pictorial is made with 🍕, ☕ and 💻 ✨
+        </v-col>
+      </v-row>
     </v-footer>
   </v-app>
 </template>
