@@ -24,7 +24,7 @@
     "vue-disqus": "^4.0.1"
   },
   "devDependencies": {
-    "@mdi/js": "^5.8.55",
+    "@mdi/js": "^5.9.55",
     "@nuxt/types": "^2.14.12",
     "@nuxt/typescript-build": "^2.0.3",
     "@nuxtjs/eslint-config": "^5.0.0",
