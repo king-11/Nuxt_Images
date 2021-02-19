@@ -4,8 +4,7 @@
       v-if="$fetchState.pending"
       class="mx-auto"
       type="card"
-      max-width="700"
-    ></v-skeleton-loader>
+      max-width="700"></v-skeleton-loader>
     <v-card v-else class="mx-auto" max-width="800">
       <v-btn
         aria-label="Download the Image"
@@ -14,8 +13,7 @@
         right
         absolute
         class="mt-8"
-        color="pink darken-1"
-      >
+        color="pink darken-1">
         <a :href="link" download>
           <v-icon color="white">{{ mdiDownload }}</v-icon>
         </a>
@@ -27,8 +25,7 @@
         <v-btn
           aria-label="Facebook Share"
           color="#1877f2"
-          :href="`https://www.facebook.com/sharer/sharer.php?u=${route}`"
-        >
+          :href="`https://www.facebook.com/sharer/sharer.php?u=${route}`">
           <v-icon left color="white">{{ mdiFacebook }}</v-icon>
           <span class="white--text text-capitalize">Share</span>
         </v-btn>
@@ -37,8 +34,7 @@
           :href="`https://twitter.com/intent/tweet?text=An%20Amazing%20click%20by%20${instaHandle}%20find%20it%20at%20${route}`"
           class="twitter-share-button"
           data-show-count="false"
-          color="#1DA1F2"
-        >
+          color="#1DA1F2">
           <v-icon left color="#F5F8FA">
             {{ mdiTwitter }}
           </v-icon>
@@ -48,8 +44,7 @@
           v-if="instaHandle"
           aria-label="Follow the photographer"
           :href="instaHandle"
-          class="instagram"
-        >
+          class="instagram">
           <v-icon left color="white">
             {{ mdiInstagram }}
           </v-icon>
@@ -73,8 +68,7 @@
             :key="elem"
             color="white"
             class="pink--text text--darken-1"
-            column
-          >
+            column>
             {{ elem }}
           </v-chip>
         </v-chip-group>

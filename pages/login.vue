@@ -20,8 +20,7 @@
             ref="emailLogin"
             v-model="valid"
             lazy-validation
-            @submit.prevent="emailLogin"
-          >
+            @submit.prevent="emailLogin">
             <v-text-field v-model="email" label="Email" :rules="emailRules">
               <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
@@ -31,8 +30,7 @@
               v-model="password"
               label="Password"
               :type="passwordShow ? 'text' : 'password'"
-              :rules="passwordRules"
-            >
+              :rules="passwordRules">
               <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiDominoMask }}
               </v-icon>
@@ -40,8 +38,7 @@
                 slot="append"
                 color="pink darken-1"
                 aria-label="password show hide"
-                @click="passwordShow = !passwordShow"
-              >
+                @click="passwordShow = !passwordShow">
                 <slot v-if="passwordShow">
                   {{ icons.mdiEye }}
                 </slot>
@@ -70,8 +67,7 @@
             :name="content.name"
             :color="content.color"
             class="white--text my-3"
-            @click.native="socialAuthHandle(content.name)"
-          >
+            @click.native="socialAuthHandle(content.name)">
             <span class="text-capitalize">Signin with {{ content.name }}</span>
             <v-icon right>
               {{ content.icon }}

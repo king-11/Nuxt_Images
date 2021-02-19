@@ -9,8 +9,7 @@
               :key="url"
               loading="lazy"
               :src="url"
-              contain
-            ></v-img>
+              contain></v-img>
           </transition>
         </v-card>
       </v-col>
@@ -20,8 +19,7 @@
         ref="uploadForm"
         v-model="valid"
         lazy-validation
-        @submit.prevent="upload"
-      >
+        @submit.prevent="upload">
         <v-file-input
           v-model="file"
           label="Select Image"
@@ -31,15 +29,13 @@
           show-size
           loading="false"
           color="pink darken-1"
-          @change="previewImage"
-        >
+          @change="previewImage">
         </v-file-input>
         <v-text-field
           v-model="place"
           label="Place"
           :rules="placeRules"
-          outlined
-        >
+          outlined>
           <v-icon slot="prepend" color="pink darken-1">
             {{ icons.mdiImageAlbum }}
           </v-icon>
@@ -50,21 +46,18 @@
           label="Tags"
           multiple
           chips
-          outlined
-        >
+          outlined>
           <template #selection="data">
             <v-chip
               :key="JSON.stringify(data.item)"
               v-bind="data.attrs"
               :input-value="data.selected"
               :disabled="data.disabled"
-              @click:close="data.parent.selectItem(data.item)"
-            >
+              @click:close="data.parent.selectItem(data.item)">
               <v-avatar
                 class="pink darken-1 white--text"
                 left
-                v-text="data.item.slice(0, 1).toUpperCase()"
-              ></v-avatar>
+                v-text="data.item.slice(0, 1).toUpperCase()"></v-avatar>
               {{ data.item }}
             </v-chip>
           </template>

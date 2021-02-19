@@ -20,13 +20,11 @@
             ref="register"
             v-model="valid"
             lazy-validation
-            @submit.prevent="register"
-          >
+            @submit.prevent="register">
             <v-text-field
               v-model="firstName"
               label="First Name"
-              :rules="nameRules"
-            >
+              :rules="nameRules">
               <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
@@ -40,8 +38,7 @@
               v-model="email"
               label="Email"
               :rules="emailRules"
-              :readonly="socialAuth"
-            >
+              :readonly="socialAuth">
               <v-icon slot="prepend" color="pink darken-1">
                 {{ icons.mdiEmail }}
               </v-icon>
@@ -52,8 +49,7 @@
                   v-model="password"
                   label="Password"
                   :type="passwordShow ? 'text' : 'password'"
-                  :rules="passwordRules"
-                >
+                  :rules="passwordRules">
                   <v-icon slot="prepend" color="pink darken-1">
                     {{ icons.mdiDominoMask }}
                   </v-icon>
@@ -61,8 +57,7 @@
                     slot="append"
                     color="pink"
                     aria-label="password show hide"
-                    @click="passwordShow = !passwordShow"
-                  >
+                    @click="passwordShow = !passwordShow">
                     <slot v-if="passwordShow">
                       {{ icons.mdiEye }}
                     </slot>
@@ -75,8 +70,7 @@
                   v-model="confirmPassword"
                   label="Confirm Password"
                   :type="confirmPasswordShow ? 'text' : 'password'"
-                  :rules="confirmPasswordRules"
-                >
+                  :rules="confirmPasswordRules">
                   <v-icon slot="prepend" color="pink darken-1">
                     {{ icons.mdiDominoMask }}
                   </v-icon>
@@ -84,8 +78,7 @@
                     slot="append"
                     color="pink darken-1"
                     aria-label="password show hide"
-                    @click="confirmPasswordShow = !confirmPasswordShow"
-                  >
+                    @click="confirmPasswordShow = !confirmPasswordShow">
                     <slot v-if="confirmPasswordShow">
                       {{ icons.mdiEye }}
                     </slot>
@@ -115,11 +108,8 @@
             :name="content.name"
             :color="content.color"
             class="white--text my-3"
-            @click.native="socialAuthHandle(content.name)"
-          >
-            <span class="text-capitalize"
-              >Register with {{ content.name }}</span
-            >
+            @click.native="socialAuthHandle(content.name)">
+            <span class="text-capitalize">Register with {{ content.name }}</span>
             <v-icon right>
               {{ content.icon }}
             </v-icon>

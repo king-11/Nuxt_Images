@@ -4,8 +4,7 @@
       <nuxt-link
         to="/"
         class="headline font-weight-bold black--text"
-        style="text-decoration: none"
-      >
+        style="text-decoration: none">
         Wallpaper
       </nuxt-link>
       <span class="subheading font-weight-light">Hub</span>
@@ -18,8 +17,7 @@
         class="pink darken-1 white--text mr-md-9"
         exact
         :to="this.$auth.loggedIn ? '/' : '/login'"
-        @click="logout"
-      >
+        @click="logout">
         <v-icon left>
           {{ mdiExitToApp }}
         </v-icon>

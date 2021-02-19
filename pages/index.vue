@@ -9,13 +9,11 @@
           lg="3"
           md="4"
           sm="6"
-          cols="12"
-        >
+          cols="12">
           <v-skeleton-loader
             class="mx-auto"
             max-width="300"
-            type="card"
-          ></v-skeleton-loader>
+            type="card"></v-skeleton-loader>
         </v-col>
       </v-row>
       <v-row v-else align="center" justify="space-around">
@@ -26,22 +24,19 @@
           lg="3"
           md="4"
           sm="6"
-          cols="12"
-        >
+          cols="12">
           <v-hover v-slot="{ hover }">
             <v-card tile class="d-flex flex-column flex-grow-1">
               <v-img
                 loading="lazy"
                 :src="image.link"
                 aspect-ratio="1"
-                class="grey lighten-2"
-              >
+                class="grey lighten-2">
                 <v-expand-transition>
                   <div
                     v-if="hover"
                     class="d-flex transition-fast-in-out black darken-2 v-card--reveal white--text"
-                    style="height: 100%"
-                  >
+                    style="height: 100%">
                     <div class="text-h4">{{ image.place }}</div>
                     <div class="text-h5">By : {{ image.name | getId }}</div>
                   </div>
@@ -50,8 +45,7 @@
                   <v-row
                     class="fill-height ma-0"
                     align="center"
-                    justify="center"
-                  >
+                    justify="center">
                     <v-progress-circular indeterminate color="grey lighten-5" />
                   </v-row>
                 </template>
@@ -65,8 +59,7 @@
                 :to="`/image/${image.id}`"
                 exact
                 right
-                absolute
-              >
+                absolute>
                 <v-icon color="pink">
                   {{ mdiArrowRightDropCircleOutline }}
                 </v-icon>
@@ -81,8 +74,7 @@
         bottom
         right
         open-on-hover
-        transition="slide-y-reverse-transition"
-      >
+        transition="slide-y-reverse-transition">
         <template #activator>
           <v-btn v-model="fab" color="pink darken-1" large dark fab>
             <v-icon v-if="fab"> {{ mdiClose }} </v-icon>

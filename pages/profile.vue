@@ -13,8 +13,7 @@
             <v-card-title
               v-for="(val, key) in user"
               :key="key"
-              class="justify-center"
-            >
+              class="justify-center">
               {{ key }}:{{ val }}
             </v-card-title>
           </v-card>
