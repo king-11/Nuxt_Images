@@ -1,24 +1,73 @@
 module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    node: true,
-  },
-  extends: [
-    '@nuxtjs/eslint-config-typescript',
-    'prettier',
-    'prettier/vue',
-    'plugin:prettier/recommended',
-    'plugin:nuxt/recommended',
-  ],
-  plugins: ['prettier'],
-  // add your custom rules here
-  rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
-  },
+	root: true,
+	env: {
+		browser: true,
+		node: true,
+	},
+	extends: [
+		'eslint:recommended',
+		'plugin:vue/recommended',
+		'plugin:nuxt/recommended',
+		'@nuxtjs/eslint-config-typescript',
+		'prettier/@typescript-eslint',
+		'prettier',
+		'prettier/vue',
+	],
+	plugins: ['vue', 'prettier'],
+	// add your custom rules here
+	rules: {
+		'no-console': 'warn',
+		'vue/order-in-components': [
+			'error',
+			{
+				order: [
+					'el',
+					'name',
+					'parent',
+					'functional',
+					['delimiters', 'comments'],
+					['components', 'directives', 'filters'],
+					'extends',
+					'mixins',
+					'inheritAttrs',
+					'model',
+					['props', 'propsData'],
+					'data',
+					'computed',
+					'watch',
+					'LIFECYCLE_HOOKS',
+					'methods',
+					['template', 'render'],
+					'renderError',
+				],
+			},
+		],
+		'vue/html-closing-bracket-newline': [
+			'error',
+			{
+				singleline: 'never',
+				multiline: 'never',
+			},
+		],
+		'vue/html-closing-bracket-spacing': [
+			'error',
+			{
+				startTag: 'never',
+				endTag: 'never',
+				selfClosingTag: 'always',
+			},
+		],
+		'vue/script-indent': [
+			'error',
+			2,
+			{
+				baseIndent: 0,
+				switchCase: 1,
+				ignores: [],
+			},
+		],
+	},
+	globals: {
+		$nuxt: true,
+	},
 }
