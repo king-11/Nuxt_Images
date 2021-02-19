@@ -13,8 +13,7 @@
       bottom
       rounded
       :color="snackbar.color"
-      mb-5
-    >
+      mb-5>
       <slot>
         <span class="text-center">{{ snackbar.message }}</span>
       </slot>
@@ -27,7 +26,7 @@
     <v-footer app padless>
       <v-row class="justify-space-around pb-1">
         <v-col class="text-center pink darken-1 white--text">
-          &copy; {{ new Date().getFullYear() }} — <strong>Lakshya Singh</strong>
+          &copy; {{ new Date().getFullYear() }} — <strong>Lakshya</strong>
         </v-col>
         <v-col class="text-center pink darken-1 white--text">
           Pictorial is made with 🍕, ☕ and 💻 ✨
