@@ -20,7 +20,7 @@
     "core-js": "^3.9.0",
     "firebase": "^7.19.0",
     "nanoid": "^3.1.20",
-    "nuxt": "^2.14.12",
+    "nuxt": "^2.15.1",
     "vue-disqus": "^4.0.1"
   },
   "devDependencies": {
