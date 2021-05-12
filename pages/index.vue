@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <client-only>
-      <v-row v-if="$fetchState.pending" align="center" justify="space-around">
+      <v-row v-if="loading" align="center" justify="space-around">
         <v-col
           v-for="n in 4"
           :key="n"
@@ -13,7 +13,7 @@
           <v-skeleton-loader
             class="mx-auto"
             max-width="300"
-            type="card"></v-skeleton-loader>
+            type="card" />
         </v-col>
       </v-row>
       <v-row v-else align="center" justify="space-around">
@@ -37,8 +37,12 @@
                     v-if="hover"
                     class="d-flex transition-fast-in-out black darken-2 v-card--reveal white--text"
                     style="height: 100%">
-                    <div class="text-h4">{{ image.place }}</div>
-                    <div class="text-h5">By : {{ image.name | getId }}</div>
+                    <div class="text-h4">
+                      {{ image.place }}
+                    </div>
+                    <div class="text-h5">
+                      By : {{ image.name | getId }}
+                    </div>
                   </div>
                 </v-expand-transition>
                 <template #placeholder>
@@ -77,18 +81,26 @@
         transition="slide-y-reverse-transition">
         <template #activator>
           <v-btn v-model="fab" color="pink darken-1" large dark fab>
-            <v-icon v-if="fab"> {{ mdiClose }} </v-icon>
-            <v-icon v-else large> {{ mdiVuejs }} </v-icon>
+            <v-icon v-if="fab">
+              {{ mdiClose }}
+            </v-icon>
+            <v-icon v-else large>
+              {{ mdiVuejs }}
+            </v-icon>
           </v-btn>
         </template>
         <nuxt-link exact to="/upload" style="text-decoration: none">
           <v-btn fab dark class="pa-2 cyan darken-3">
-            <v-icon large>{{ mdiPlus }}</v-icon>
+            <v-icon large>
+              {{ mdiPlus }}
+            </v-icon>
           </v-btn>
         </nuxt-link>
         <nuxt-link exact to="/profile" style="text-decoration: none">
           <v-btn fab dark color="pa-2 blue-grey darken-1">
-            <v-icon large>{{ mdiAccountCircle }} </v-icon>
+            <v-icon large>
+              {{ mdiAccountCircle }}
+            </v-icon>
           </v-btn>
         </nuxt-link>
         <nuxt-link exact to="/collection" style="text-decoration: none">
@@ -127,6 +139,7 @@ interface Data {
   mdiVuejs: string
   images: Image[]
   fab: boolean
+  loading: boolean
 }
 
 export default Vue.extend({
@@ -143,9 +156,11 @@ export default Vue.extend({
       mdiArrowRightDropCircleOutline,
       mdiVuejs,
       images: [],
+      loading: false,
     }
   },
-  async fetch() {
+  async mounted() {
+    this.loading = true
     const response = await this.$axios.$get('/api/')
     response.results.forEach((val: any) => {
       this.images.push({
@@ -155,6 +170,7 @@ export default Vue.extend({
         place: val.place,
       })
     })
+    this.loading = false
   },
   head: {
     title: 'Home',

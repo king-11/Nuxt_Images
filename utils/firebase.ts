@@ -17,10 +17,6 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
 
-;(async function setPersistence() {
-  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-})()
-
 export const auth = firebase.auth()
 export const github = new firebase.auth.GithubAuthProvider()
 export const google = new firebase.auth.GoogleAuthProvider()

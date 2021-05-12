@@ -11,7 +11,6 @@ module.exports = {
 		'@nuxtjs/eslint-config-typescript',
 		'prettier/@typescript-eslint',
 		'prettier',
-		'prettier/vue',
 	],
 	plugins: ['vue', 'prettier'],
 	// add your custom rules here
