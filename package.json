@@ -19,7 +19,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "core-js": "^3.9.0",
     "firebase": "^7.19.0",
-    "nanoid": "^3.1.20",
+    "nanoid": "^3.1.31",
     "nuxt": "^2.14.12",
     "vue-disqus": "^4.0.1"
   },
